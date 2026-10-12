@@ -1,0 +1,2 @@
+import { ADDRESS, SITE_NAME } from "@/lib/site";
+export default function MapEmbed() { return <section className="map-section" aria-label="Salon location"><iframe title={`Google Maps location of ${SITE_NAME}`} src={`https://maps.google.com/maps?q=${encodeURIComponent(ADDRESS)}&output=embed`} loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen/><a className="outline-button map-link" href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(ADDRESS)}`} target="_blank" rel="noopener noreferrer">Get Directions ↗</a></section>; }
