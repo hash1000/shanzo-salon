@@ -1,3 +1,29 @@
 import Image from "next/image";
 import { BOOKING_URL, PHONE, PHONE_HREF } from "@/lib/site";
-export default function Hero() { return <section className="home-hero" aria-labelledby="hero-title"><Image src="/media/hero.jpeg" alt="Champagne gold mosaic wall and cream pedicure chairs in the salon" fill preload sizes="100vw" className="object-cover"/><div className="hero-shade"/><div className="hero-content"><h1 id="hero-title" className="font-script">Revitalize Your Beauty Today</h1><p>Experience luxurious beauty treatments at our salon</p><a className="gold-button" href={BOOKING_URL}>Book Your Appointment</a><a className="hero-phone" href={PHONE_HREF}>{PHONE}</a></div></section>; }
+export default function Hero() {
+  return (
+    <section className="home-hero" aria-labelledby="hero-title">
+      <Image
+        src="/media/hero.jpeg"
+        alt="Champagne gold mosaic wall and cream pedicure chairs in the salon"
+        fill
+        preload
+        sizes="100vw"
+        className="object-cover"
+      />
+      <div className="hero-shade" />
+      <div className="hero-content">
+        <h1 id="hero-title" className="font-script">
+          Revitalize Your Beauty Today
+        </h1>
+        <p>Experience luxurious beauty treatments at our salon</p>
+        <a className="gold-button" href={BOOKING_URL}>
+          Book Your Appointment
+        </a>
+        <a className="hero-phone" href={PHONE_HREF}>
+          {PHONE}
+        </a>
+      </div>
+    </section>
+  );
+}
