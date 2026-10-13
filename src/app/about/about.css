@@ -1,1 +1,52 @@
 .about-gallery{padding-top:58px;padding-bottom:0}.about-gallery h1{margin-bottom:32px}.about-main-image{overflow:hidden;border-radius:12px}.about-main-image img,.about-detail-grid img{display:block;width:100%;height:auto}.about-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:28px}.about-detail-grid img{border-radius:10px}.about-instagram{padding-top:100px;padding-bottom:82px}.about-instagram .eyebrow{margin-bottom:28px}.about-instagram p{color:#75695e;font-size:14px;margin-bottom:20px}.about-instagram .text-link{display:inline-block;font-size:11px;letter-spacing:1px}.about-reviews{position:relative;isolation:isolate;min-height:300px;display:grid;align-items:center;overflow:hidden}.about-reviews>img{object-position:center 65%}.about-reviews-shade{position:absolute;inset:0;background:#21180eb3}.about-reviews-content{position:relative;color:#fff;padding-block:48px}.about-reviews-content p{max-width:620px;margin:30px auto 0;background:#21180e80;border:1px solid #ffffff24;border-radius:6px;padding:17px 24px;font-size:14px}.about-page .social-section{padding-block:72px}.about-page .social-section .eyebrow{margin-bottom:28px}@media(max-width:639px){.about-gallery{padding-top:36px}.about-detail-grid{grid-template-columns:1fr;gap:18px;margin-top:18px}.about-main-image{border-radius:8px}.about-instagram{padding-block:64px}.about-reviews{min-height:270px}.about-page .social-section{padding-block:54px}}
+
+.about-team {
+  padding-top: 88px;
+  padding-bottom: 24px;
+}
+.about-team > .eyebrow {
+  margin-bottom: 16px;
+}
+.about-team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin: 40px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.about-team-member {
+  padding: 32px 16px;
+  border: 1px solid #e9e5e1;
+  border-radius: 10px;
+  background: #faf9f7;
+}
+.about-team-avatar {
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: #eee8e1;
+  color: #64584c;
+  font-size: 23px;
+  letter-spacing: 2px;
+}
+.about-team-member h3 {
+  font-size: 17px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.about-team-member p {
+  margin-top: 6px;
+  color: #75695e;
+  font-size: 13px;
+}
+@media (max-width: 900px) {
+  .about-team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 639px) {
+  .about-team { padding-top: 56px; }
+  .about-team-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 28px; }
+}

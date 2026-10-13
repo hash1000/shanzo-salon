@@ -17,6 +17,16 @@ export const metadata: Metadata = {
   },
 };
 
+const team = [
+  { name: "Molly Sproles-Barbian", initials: "MS", service: "Hair Service" },
+  { name: "Genean DuFault", initials: "GD", service: "Hair Service" },
+  { name: "Deanna Walsh", initials: "DW", service: "Hair Service" },
+  { name: "Nina Maney", initials: "NM", service: "Hair Service" },
+  { name: "Dana Rivera", initials: "DR", service: "Nail Service" },
+  { name: "Marija Aleksic", initials: "MA", service: "Nail Service" },
+  { name: "Melanie Ruiz", initials: "MR", service: "Waxing Service" },
+];
+
 export default function AboutPage() {
   return (
     <div className="salon-home about-page">
@@ -33,6 +43,19 @@ export default function AboutPage() {
               <Image src="/about/about-2.webp" alt="Gold faucet beside a sculptural vase and fresh towels at the salon" width={1200} height={600} sizes="(max-width: 639px) 100vw, (max-width: 1159px) 50vw, 546px" />
               <Image src="/about/web-3.webp" alt="Gold Coast Beauty Spa business cards on a wooden counter" width={1200} height={600} sizes="(max-width: 639px) 100vw, (max-width: 1159px) 50vw, 546px" />
             </div>
+          </section>
+          <section className="about-team home-container text-center" aria-labelledby="team-title">
+            <p className="eyebrow">The people behind your visit</p>
+            <h2 id="team-title" className="section-title font-script">Our Team</h2>
+            <ul className="about-team-grid">
+              {team.map((member) => (
+                <li key={member.name} className="about-team-member">
+                  <div className="about-team-avatar" aria-hidden="true">{member.initials}</div>
+                  <h3>{member.name}</h3>
+                  {member.service && <p>{member.service}</p>}
+                </li>
+              ))}
+            </ul>
           </section>
           <section className="about-instagram home-container text-center" aria-labelledby="instagram-title">
             <h2 id="instagram-title" className="eyebrow">Instagram</h2>
