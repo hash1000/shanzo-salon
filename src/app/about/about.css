@@ -16,17 +16,30 @@
   list-style: none;
 }
 .about-team-member {
-  padding: 32px 16px;
+  padding: 0 0 24px;
+  overflow: hidden;
   border: 1px solid #e9e5e1;
   border-radius: 10px;
   background: #faf9f7;
+}
+.about-team-portrait {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 5;
+  margin-bottom: 24px;
+  background: #eee8e1;
+}
+.about-team-portrait img {
+  object-fit: cover;
+  object-position: center top;
 }
 .about-team-avatar {
   display: grid;
   place-items: center;
   width: 76px;
   height: 76px;
-  margin: 0 auto 20px;
+  margin: 0;
   border-radius: 50%;
   background: #eee8e1;
   color: #64584c;
@@ -34,6 +47,7 @@
   letter-spacing: 2px;
 }
 .about-team-member h3 {
+  padding-inline: 16px;
   font-size: 17px;
   font-weight: 500;
   overflow-wrap: anywhere;

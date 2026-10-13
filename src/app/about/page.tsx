@@ -18,13 +18,13 @@ export const metadata: Metadata = {
 };
 
 const team = [
-  { name: "Molly Sproles-Barbian", initials: "MS", service: "Hair Service" },
-  { name: "Genean DuFault", initials: "GD", service: "Hair Service" },
-  { name: "Deanna Walsh", initials: "DW", service: "Hair Service" },
-  { name: "Nina Maney", initials: "NM", service: "Hair Service" },
-  { name: "Dana Rivera", initials: "DR", service: "Nail Service" },
-  { name: "Marija Aleksic", initials: "MA", service: "Nail Service" },
-  { name: "Melanie Ruiz", initials: "MR", service: "Waxing Service" },
+  { name: "Molly Sproles-Barbian", initials: "MS", service: "Hair Stylist", image: "/molly-sproles-Barbian(Hair Stylist).png" },
+  { name: "Genean DuFault", initials: "GD", service: "Hair Stylist", image: null },
+  { name: "Deanna Walsh", initials: "DW", service: "Hair Stylist", image: null },
+  { name: "Nina Maney", initials: "NM", service: "Hair Stylist", image: "/nina-maney(Hair Stylist).png" },
+  { name: "Dana Rivera", initials: "DR", service: "Nail Technician", image: "/dana-rivera(Nail Technician) 2026.png" },
+  { name: "Marija Aleksic", initials: "MA", service: "Nail Technician", image: "/marija-aleksic (Nail Technician).png" },
+  { name: "Melanie Ruiz", initials: "MR", service: "Esthetician", image: "/melanie-ruiz(Esthetician).png" },
 ];
 
 export default function AboutPage() {
@@ -50,7 +50,18 @@ export default function AboutPage() {
             <ul className="about-team-grid">
               {team.map((member) => (
                 <li key={member.name} className="about-team-member">
-                  <div className="about-team-avatar" aria-hidden="true">{member.initials}</div>
+                  <div className="about-team-portrait">
+                    {member.image ? (
+                      <Image
+                        src={member.image}
+                        alt={`${member.name}, ${member.service}`}
+                        fill
+                        sizes="(max-width: 639px) 84vw, (max-width: 900px) 35vw, 23vw"
+                      />
+                    ) : (
+                      <span className="about-team-avatar" aria-hidden="true">{member.initials}</span>
+                    )}
+                  </div>
                   <h3>{member.name}</h3>
                   {member.service && <p>{member.service}</p>}
                 </li>

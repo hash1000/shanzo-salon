@@ -55,7 +55,10 @@ export default function ContactSection({
         method: "POST",
         body,
       });
-      if (!response.ok) throw new Error();
+      const result = await response.json();
+      if (!response.ok || result.success !== true) {
+        throw new Error(typeof result.error === "string" ? result.error : "Your message could not be sent. Please try again or call us.");
+      }
       setStatus({
         text: "Thank you! Your message has been sent.",
         error: false,
@@ -64,9 +67,11 @@ export default function ContactSection({
       setAttachments([]);
       setFileError("");
       if (fileInput.current) fileInput.current.value = "";
-    } catch {
+    } catch (error) {
       setStatus({
-        text: "Your message could not be sent. Please try again or call us.",
+        text: error instanceof Error && !(error instanceof TypeError) && !(error instanceof SyntaxError)
+          ? error.message
+          : "Your message could not be sent. Please try again or call us.",
         error: true,
       });
     }
