@@ -2,8 +2,8 @@ export const SITE_NAME = "Gold Coast Beauty Spa";
 export const ADDRESS = "67 West Chicago Avenue, Chicago, IL, USA";
 export const PHONE = "+1 (312) 754-0191";
 export const PHONE_HREF = "tel:+13127540191";
-export const BOOKING_URL = "";
-  // "https://goldcoastbeautybyshanzo.glossgenius.com/book";
+export const BOOKING_URL = 
+  "https://goldcoastbeautybyshanzo.glossgenius.com/book";
 export const SOCIALS = {
   instagram: "https://www.instagram.com/your-salon",
   tiktok: "https://www.tiktok.com/@your-salon",
