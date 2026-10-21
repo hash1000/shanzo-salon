@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import SiteShell, { PageHeading, VisitCTA } from "@/components/site/SiteShell";
 import Gallery from "@/components/site/Gallery";
+import "./gallery.css";
 export const metadata: Metadata = {
   title: "Gallery | Shanzo Salon",
   description:

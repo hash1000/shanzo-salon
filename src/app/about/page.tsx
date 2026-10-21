@@ -38,10 +38,10 @@ export default function AboutPage() {
       <a className="about-skip" href="#main-content">Skip to content</a>
       <AboutNav />
       <main id="main-content">
-        <section className="about-hero" aria-labelledby="about-title">
+        <section className="about-hero home-screen-hero" aria-labelledby="about-title">
           <Image src={images.hero.src} alt={images.hero.alt} fill preload sizes="100vw" className="object-cover" />
           <div className="about-hero-shade site-bright-shade" />
-          <div className="about-wrap relative z-10 py-28 md:py-36">
+          <div className="about-wrap home-hero-content relative z-10">
             <p className="about-label text-white/85">Shanzo Salon · Chicago</p>
             <h1 id="about-title">A little time,<br /><em>beautifully yours.</em></h1>
             <p className="about-hero-description">Personal care. Thoughtful details. A place to feel like yourself.</p>

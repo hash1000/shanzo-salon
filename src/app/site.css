@@ -615,6 +615,29 @@ body {
     max-width: 300px;
     font-size: 14px;
   }
+  .about-hero-description p {
+    font-size: 14px;
+  } 
+}
+
+/* Fill the viewport beside the desktop rail and below the mobile header. */
+.about-luxury .home-screen-hero {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+.home-screen-hero .home-hero-content {
+  padding-block: 64px;
+  text-align: center;
+}
+.home-screen-hero .home-hero-content h1,
+.home-screen-hero .home-hero-content .about-hero-description {
+  margin-inline: auto;
+}
+@media (max-width: 767px) {
+  .about-luxury .home-screen-hero {
+    min-height: calc(100vh - 84px);
+    min-height: calc(100dvh - 84px);
+  }
 }
 
 /* Measured type scale from shanzosalon.com, shared by every page. */

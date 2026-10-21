@@ -28,7 +28,7 @@ export default function AboutNav() {
           aria-label="Shanzo Salon home"
           onClick={() => setOpen(false)}
         >
-          Shanzo Salon<span>CHICAGO</span>
+          Gold Coast Beauty Spa
         </Link>
         <button
           ref={toggle}

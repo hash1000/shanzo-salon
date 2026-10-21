@@ -28,7 +28,7 @@ const services = [
 export default function Home() {
   return (
     <SiteShell>
-      <section className="about-hero" aria-labelledby="home-title">
+      <section className="about-hero home-screen-hero" aria-labelledby="home-title">
         <Image
           src="/images/pedicure-lounge.webp"
           alt="Tan pedicure chairs against the textured gold wall at Shanzo Salon"
@@ -38,14 +38,13 @@ export default function Home() {
           className="object-cover"
         />
         <div className="about-hero-shade site-bright-shade" />
-        <div className="about-wrap relative z-10 py-28 md:py-36">
+        <div className="about-wrap home-hero-content relative z-10 text-center">
           <p className="about-label text-white/85">Shanzo Salon · Chicago</p>
-          <h1 id="home-title">
-            Your time.
+          <h1 id="home-title" className="text-center">
+            Revitalize Your Beauty Today
             <br />
-            <em>Your kind of care.</em>
           </h1>
-          <p className="about-hero-description">
+          <p>
             Hair, nails, and waxing for men, women, and kids. A warm welcome,
             every visit.
           </p>
