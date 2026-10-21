@@ -3,6 +3,7 @@ import { Parisienne, Quicksand } from "next/font/google";
 import "./globals.css";
 import "./about/about.css";
 import "./site.css";
+import "./decor.css";
 import { SITE_NAME } from "@/lib/site";
 
 const serif = Parisienne({

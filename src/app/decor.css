@@ -1,0 +1,88 @@
+/* A shared palette of warm paper, champagne lines, and quiet ornaments. */
+.about-luxury {
+  --salon-gold: #a18150;
+  --salon-line: #e3d5bf;
+  --salon-paper: #fcf9f3;
+}
+.about-luxury main {
+  background: radial-gradient(ellipse 650px 380px at 100% 0, #f3ebdd80, transparent), #fff;
+}
+.about-luxury .site-page-heading { position: relative; }
+.about-luxury .site-page-heading::before {
+  content: ""; display: block; width: 62px; height: 3px; margin-bottom: 25px;
+  background: linear-gradient(90deg, #a18150, #e8dcc5); border-radius: 3px;
+}
+.about-luxury .about-label { color: #8c6d42; }
+.about-luxury .about-hero .about-label { color: #fff2db; }
+.about-luxury .site-visit-cta .about-label,
+.about-luxury .about-promise .about-label { color: #d4b785; }
+.about-luxury .about-hero::after {
+  content: ""; position: absolute; inset: 22px; border: 1px solid #fff7e140;
+  pointer-events: none; z-index: 1;
+}
+.about-luxury .about-hero-scroll { z-index: 2; }
+.about-luxury .about-rule { width: 90px; position: relative; background: #cbb58f; }
+.about-luxury .about-rule::after {
+  content: ""; position: absolute; right: -3px; top: -3px; width: 7px; height: 7px;
+  transform: rotate(45deg); background: #a18150;
+}
+.about-luxury .about-services {
+  background: radial-gradient(ellipse at top right, #e8d8bd80, transparent 60%), #f6f1e8;
+  border-block: 1px solid #e8ddcc;
+}
+.about-luxury .about-service-card {
+  background: #fffdf9; border-color: #e3d5bf;
+  box-shadow: 0 8px 24px #5c432b06;
+}
+.about-luxury .about-card-number {
+  display: grid; place-items: center; width: 42px; height: 42px;
+  border: 1px solid #d9c5a3; border-radius: 50%; color: #927247;
+}
+.about-luxury .about-story-main { box-shadow: 12px 12px 0 #f0e7d8; }
+.about-luxury .about-story-detail { box-shadow: 0 12px 30px #4d38251a; }
+.about-luxury .about-reason { border-top-color: #c7ac80; padding-top: 30px; }
+.about-luxury .about-reason > svg {
+  box-sizing: content-box; padding: 14px; background: #f6f0e5;
+  border: 1px solid #e4d4ba; border-radius: 50%; color: #967444;
+}
+.about-luxury .about-promise { background: radial-gradient(ellipse at top, #514333, #302b27 80%); }
+.about-luxury .about-promise .about-wrap { border-block: 1px solid #cbb58f50; padding-block: 32px; }
+.about-luxury .site-highlight { border: 7px solid #f1e8da; box-shadow: 0 16px 36px #58432c10; }
+.about-luxury .site-highlight-label { border: 1px solid #dfcfb4; background: #fffaf2f5; }
+.about-luxury .contact-details {
+  position: relative; border: 1px solid #e0d0b6;
+  background: linear-gradient(145deg, #faf5eb, #eee3d2);
+  box-shadow: 0 12px 30px #59422408;
+}
+.about-luxury .contact-details::before {
+  content: "✧"; display: block; color: #a18150; font: 44px/1 Georgia, serif; margin-bottom: 18px;
+}
+.about-luxury .home-form {
+  padding: clamp(18px, 3vw, 32px); border: 1px solid #e8dfd2;
+  border-radius: 18px; background: linear-gradient(150deg, #fdfbf7, #fff);
+}
+.about-luxury .home-form input:not([type="file"]),
+.about-luxury .home-form textarea,
+.about-luxury .home-form select { border-radius: 8px; background: #fff; }
+.about-luxury .gallery-filters { border-bottom: 1px solid #e7dbc9; padding-bottom: 22px; }
+.about-luxury .gallery-pin figcaption { border-left: 2px solid #d7bf98; margin: 14px 5px 0; padding: 0 12px; }
+.about-luxury .site-hiring {
+  position: relative; overflow: hidden;
+  background: radial-gradient(ellipse at 90% 10%, #e6d5b8, transparent 65%), #f2ece2;
+  border-block-color: #ddccb0;
+}
+.about-luxury .site-hiring::before {
+  content: ""; position: absolute; right: -65px; top: -110px; width: 290px; height: 290px;
+  border: 1px solid #b4986950; border-radius: 50%; pointer-events: none;
+  box-shadow: 0 0 0 24px #b4986910, 0 0 0 48px #b4986909;
+}
+.about-luxury .site-hiring > * { position: relative; }
+.about-luxury .about-footer { border-top: 1px solid #ede3d4; }
+.about-luxury .about-button { transition: background .2s, color .2s, transform .2s; }
+@media(max-width:767px) {
+  .about-luxury .about-hero::after { inset: 12px; }
+  .about-luxury .about-story-main { box-shadow: 7px 7px 0 #f0e7d8; }
+  .about-luxury .site-highlight-label { left: 14px; bottom: 14px; padding: 20px; }
+  .about-luxury .contact-grid { gap: 36px; }
+}
+@media(prefers-reduced-motion:reduce) { .about-luxury .about-button { transition: none; } }

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { ArrowUpRight, Scissors, Sparkles, Flower2 } from "lucide-react";
 import SiteShell, {
   PageHeading,
   HiringSection,
 } from "@/components/site/SiteShell";
 import Reveal from "@/components/about/AboutReveal";
-import { SITE_NAME } from "@/lib/site";
+import { BOOKING_URL, SITE_NAME } from "@/lib/site";
 import "./team.css";
 
 export const metadata: Metadata = {
@@ -66,6 +67,7 @@ const team = [
 export default function TeamPage() {
   return (
     <SiteShell>
+      <div className="team-page">
       <PageHeading
         label="01 / The people behind your visit"
         title="Care comes"
@@ -74,6 +76,14 @@ export default function TeamPage() {
         Meet the people who make your visit personal. Hair, nails, and waxing,
         with time to listen.
       </PageHeading>
+      <div className="team-intro-details about-wrap">
+        <span className="team-intro-note">A personal touch. A beautiful feeling.</span>
+        <div className="team-specialties" aria-label="Our specialties">
+          <span><Scissors size={15} aria-hidden="true" /> Hair artistry</span>
+          <span><Sparkles size={15} aria-hidden="true" /> Nail care</span>
+          <span><Flower2 size={15} aria-hidden="true" /> Skin & waxing</span>
+        </div>
+      </div>
       <Reveal>
         <section className="team about-wrap text-center" aria-label="Our team">
           <ul className="team-grid">
@@ -82,7 +92,7 @@ export default function TeamPage() {
                 key={member.name}
                 className={`team-member${member.bio ? " team-member-featured" : ""}`}
               >
-                <div className="team-portrait">
+                <div className={`team-portrait${!member.image ? " team-portrait-placeholder" : ""}`}>
                   {member.image ? (
                     <Image
                       src={member.image}
@@ -96,8 +106,10 @@ export default function TeamPage() {
                       {member.initials}
                     </span>
                   )}
+                  <span className="team-portrait-mark" aria-hidden="true"><Sparkles size={19} /></span>
                 </div>
                 <div className="team-member-content">
+                  {member.bio && <p className="team-featured-label">In the stylist’s chair</p>}
                   <h2>{member.name}</h2>
                   <p className="team-member-service">{member.service}</p>
                   {member.bio && (
@@ -108,6 +120,9 @@ export default function TeamPage() {
                       ))}
                     </div>
                   )}
+                  <a href={BOOKING_URL} className="team-book-link" aria-label={`Book an appointment with ${member.name}`}>
+                    Book a visit <ArrowUpRight size={16} aria-hidden="true" />
+                  </a>
                 </div>
               </li>
             ))}
@@ -115,6 +130,7 @@ export default function TeamPage() {
         </section>
       </Reveal>
       <HiringSection />
+      </div>
     </SiteShell>
   );
 }
