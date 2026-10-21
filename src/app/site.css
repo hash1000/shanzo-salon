@@ -633,7 +633,7 @@ body {
 .home-screen-hero .home-hero-content .about-hero-description {
   margin-inline: auto;
 }
-@media (max-width: 767px) {
+@media (max-width: 767px) { 
   .about-luxury .home-screen-hero {
     min-height: calc(100vh - 84px);
     min-height: calc(100dvh - 84px);
