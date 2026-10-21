@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 const team = [
   { name: "Molly Sproles-Barbian", initials: "MS", service: "Hair Stylist", image: "/molly-sproles-Barbian(Hair Stylist).png" },
-  { name: "Genean DuFault", initials: "GD", service: "Hair Stylist", image: null },
+  { name: "Genean Michele", initials: "GD", service: "Hair Stylist", image: null },
   { name: "Deanna Walsh", initials: "DW", service: "Hair Stylist", image: null },
   { name: "Nina Maney", initials: "NM", service: "Hair Stylist", image: "/nina-maney(Hair Stylist).png" },
   { name: "Dana Rivera", initials: "DR", service: "Nail Technician", image: "/dana-rivera(Nail Technician) 2026.png" },

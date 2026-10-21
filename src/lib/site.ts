@@ -17,7 +17,7 @@ export const HOURS = [
   { day: "Thursday", hours: "10 AM - 7 PM" },
   { day: "Friday", hours: "10 AM - 7 PM" },
   { day: "Saturday", hours: "10 AM - 7 PM" },
-  { day: "Sunday", hours: "10 AM - 7 PM" },
+  { day: "Sunday", hours: "01 PM - 7 PM" },
 ];
 export const NAV_LINKS = [
   { label: "Home", href: "/" },
