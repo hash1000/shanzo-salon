@@ -1,0 +1,152 @@
+.team {
+  padding-top: 0;
+  padding-bottom: 88px;
+}
+.team > .eyebrow {
+  margin-bottom: 16px;
+}
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin: 40px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.team-member {
+  padding: 0 0 24px;
+  overflow: hidden;
+  border: 1px solid #e9e5e1;
+  border-radius: 100px 100px 8px 8px;
+  background: #faf8f3;
+}
+.team-portrait {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 5;
+  margin-bottom: 24px;
+  background: #eee9e0;
+}
+.team-portrait img {
+  object-fit: cover;
+  object-position: center top;
+}
+.team-avatar {
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  margin: 0;
+  border-radius: 8px;
+  background: #eee9e0;
+  color: #64584c;
+  font-size: 23px;
+  letter-spacing: 2px;
+}
+.team-member-content > h2 {
+  padding-inline: 16px;
+  font-size: 17px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.team-member-service {
+  margin-top: 6px;
+  color: #75695e;
+  font-size: 13px;
+}
+@media (max-width: 900px) {
+  .team-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 639px) {
+  .team {
+    padding-top: 0;
+  }
+  .team-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 28px;
+  }
+}
+
+.team-grid {
+  align-items: start;
+}
+.team-member-featured {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  text-align: left;
+  padding-bottom: 0;
+}
+.team-member-featured .team-portrait {
+  margin-bottom: 0;
+  min-height: 100%;
+}
+.team-member-featured .team-member-content {
+  padding: 32px;
+}
+.team-member-featured .team-member-content > h2 {
+  padding-inline: 0;
+  font-size: 24px;
+}
+.team-member-bio {
+  margin-top: 24px;
+}
+.team-member-bio h3 {
+  font-size: 15px;
+  font-weight: 600;
+}
+.team-member-bio p {
+  margin-top: 16px;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #64584c;
+}
+@media (max-width: 900px) {
+  .team-member-featured {
+    grid-template-columns: 1fr;
+  }
+  .team-member-featured .team-portrait {
+    min-height: auto;
+    max-height: 520px;
+  }
+}
+@media (max-width: 639px) {
+  .team {
+    padding-bottom: 56px;
+  }
+  .team-member-featured .team-member-content {
+    padding: 24px;
+  }
+}
+
+.about-luxury .team-member-content > h2 {
+  font-size: 26px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.team-grid {
+  margin-top: 0;
+}
+.team-member-content {
+  padding-inline: 14px;
+}
+.team-member-featured {
+  border-radius: 8px;
+}
+.team-member-featured .team-portrait {
+  border-radius: 140px 140px 0 0;
+  overflow: hidden;
+}
+.team-member-bio {
+  text-align: left;
+}
+.team-member-bio h3 {
+  color: #80603a;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 10px;
+}

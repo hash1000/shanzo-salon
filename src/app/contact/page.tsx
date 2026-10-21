@@ -1,30 +1,44 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/home/Navbar";
+import SiteShell, {
+  PageHeading,
+  SocialLinks,
+} from "@/components/site/SiteShell";
 import ContactSection from "@/components/home/ContactSection";
-import SocialLinks from "@/components/home/SocialLinks";
-import Footer from "@/components/home/Footer";
-import { SITE_NAME, ADDRESS } from "@/lib/site";
-import "./contact.css";
-
 export const metadata: Metadata = {
-  title: `Contact Us | ${SITE_NAME}`,
-  description: `Get in touch with ${SITE_NAME} at ${ADDRESS}. Send a message, call us, or check our opening hours.`,
-  openGraph: {
-    title: `Contact Us | ${SITE_NAME}`,
-    description: "Send us a message or visit our nail and beauty salon in Chicago. View our address, phone number, and opening hours.",
-  },
+  title: "Contact | Shanzo Salon",
+  description:
+    "Contact Shanzo Salon at 67 W Chicago Ave, Chicago, IL 60654. Call +1 (312) 754-0191. Open 10 AM–7 PM daily.",
 };
-
 export default function ContactPage() {
   return (
-    <div className="salon-home contact-page">
-      <a className="skip-link" href="#main-content">Skip to content</a>
-      <Navbar />
-      <main id="main-content">
-        <ContactSection variant="page" />
-        <SocialLinks heading="Connect with us" />
-      </main>
-      <Footer />
-    </div>
+    <SiteShell>
+      <PageHeading label="01 / Let’s talk" title="We’re here" accent="for you.">
+        Questions about a service or your next visit? Send us a note. For
+        appointments, you can also book online.
+      </PageHeading>
+      <ContactSection variant="page" />
+      <section className="about-wrap pb-20">
+        <p className="about-label">02 / Come on in</p>
+        <iframe
+          title="Shanzo Salon at 67 W Chicago Ave, Chicago, IL 60654"
+          src="https://maps.google.com/maps?q=67+W+Chicago+Ave+Chicago+IL+60654&output=embed"
+          loading="lazy"
+          allowFullScreen
+          referrerPolicy="no-referrer-when-downgrade"
+          className="h-96 w-full rounded-2xl border-0"
+        />
+        <div className="mt-6 flex justify-between gap-6">
+          <a
+            href="https://www.google.com/maps/dir/?api=1&destination=67+W+Chicago+Ave+Chicago+IL+60654"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="about-text-link"
+          >
+            Get directions ↗
+          </a>
+          <SocialLinks />
+        </div>
+      </section>
+    </SiteShell>
   );
 }

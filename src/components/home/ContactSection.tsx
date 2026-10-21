@@ -11,12 +11,13 @@ import {
   PHONE_HREF,
   CANCELLATION_POLICY,
   HOURS,
-  SITE_NAME,
 } from "@/lib/site";
 export default function ContactSection({
   variant = "home",
+  application = false,
 }: {
   variant?: "home" | "page";
+  application?: boolean;
 }) {
   const [attachments, setAttachments] = useState<File[]>([]);
   const [fileError, setFileError] = useState("");
@@ -46,10 +47,14 @@ export default function ContactSection({
   async function submit(values: z.infer<typeof contactSchema>) {
     setStatus({ text: "", error: false });
     const error = attachmentError(attachments);
-    if (error) { setFileError(error); return; }
+    if (error) {
+      setFileError(error);
+      return;
+    }
     const body = new FormData();
     Object.entries(values).forEach(([key, value]) => body.append(key, value));
-    attachments.forEach(file => body.append("attachments", file));
+    attachments.forEach((file) => body.append("attachments", file));
+    if (application) body.set("inquiryType", "application");
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -57,7 +62,11 @@ export default function ContactSection({
       });
       const result = await response.json();
       if (!response.ok || result.success !== true) {
-        throw new Error(typeof result.error === "string" ? result.error : "Your message could not be sent. Please try again or call us.");
+        throw new Error(
+          typeof result.error === "string"
+            ? result.error
+            : "Your message could not be sent. Please try again or call us.",
+        );
       }
       setStatus({
         text: "Thank you! Your message has been sent.",
@@ -69,28 +78,28 @@ export default function ContactSection({
       if (fileInput.current) fileInput.current.value = "";
     } catch (error) {
       setStatus({
-        text: error instanceof Error && !(error instanceof TypeError) && !(error instanceof SyntaxError)
-          ? error.message
-          : "Your message could not be sent. Please try again or call us.",
+        text:
+          error instanceof Error &&
+          !(error instanceof TypeError) &&
+          !(error instanceof SyntaxError)
+            ? error.message
+            : "Your message could not be sent. Please try again or call us.",
         error: true,
       });
     }
   }
   return (
-    <section className="contact-section section-space">
-      <div className="home-container">
-        {variant === "page" ? (
-          <h1 className="eyebrow text-center">Contact Us</h1>
-        ) : (
-          <p className="eyebrow text-center">Contact us</p>
-        )}
+    <section className="contact-section site-contact">
+      <div className="about-wrap">
         <div className="contact-grid">
           <div>
-            <h2 className="section-title font-script">
-              {variant === "page" ? "Drop us a line!" : "Get in Touch"}
+            <h2 className="site-form-title">
+              {application ? "Your application" : "Send a little note."}
             </h2>
             <form
-              onSubmit={handleSubmit(submit)}
+              onSubmit={(event) => {
+                void handleSubmit(submit)(event);
+              }}
               noValidate
               className="home-form"
             >
@@ -129,7 +138,19 @@ export default function ContactSection({
                   {errors.email.message}
                 </p>
               )}
-              <label htmlFor="contact-message">Message</label>
+              <label htmlFor="contact-service">
+                {application ? "Your specialty" : "Services interested in"}
+              </label>
+              <select id="contact-service" {...register("service")}>
+                <option value="">Select a service (optional)</option>
+                <option value="Hair">Hair</option>
+                <option value="Nails">Nails</option>
+                <option value="Waxing">Waxing</option>
+                <option value="Multiple services">Multiple services</option>
+              </select>
+              <label htmlFor="contact-message">
+                {application ? "Experience and availability" : "Message"}
+              </label>
               <textarea
                 id="contact-message"
                 placeholder={
@@ -148,21 +169,86 @@ export default function ContactSection({
                 </p>
               )}
               <div className="attachment-row">
-                <input ref={fileInput} id="contact-files" className="attachment-input" type="file" multiple accept={ATTACHMENT_ACCEPT} disabled={isSubmitting} aria-label="Attach files" aria-describedby="attachment-help attachment-error" onChange={event => {
-                  const selected = Array.from(event.target.files ?? []);
-                  const error = attachmentError(selected);
-                  setFileError(error ?? "");
-                  if (error) { event.target.value = ""; setAttachments([]); }
-                  else setAttachments(selected);
-                }} />
-                <button type="button" className="attach-button" onClick={() => fileInput.current?.click()} disabled={isSubmitting}><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><path d="m21 11-9 9a6 6 0 0 1-8.5-8.5l10-10a4 4 0 0 1 5.7 5.7l-10 10a2 2 0 0 1-2.8-2.8L16 5"/></svg> Attach Files</button>
-                <span className="attachment-count">Attachments ({attachments.length})</span>
+                <input
+                  ref={fileInput}
+                  id="contact-files"
+                  className="attachment-input"
+                  type="file"
+                  multiple
+                  accept={ATTACHMENT_ACCEPT}
+                  disabled={isSubmitting}
+                  aria-label="Attach files"
+                  aria-describedby="attachment-help attachment-error"
+                  onChange={(event) => {
+                    const selected = Array.from(event.target.files ?? []);
+                    const error = attachmentError(selected);
+                    setFileError(error ?? "");
+                    if (error) {
+                      event.target.value = "";
+                      setAttachments([]);
+                    } else setAttachments(selected);
+                  }}
+                />
+                <button
+                  type="button"
+                  className="attach-button"
+                  onClick={() => fileInput.current?.click()}
+                  disabled={isSubmitting}
+                >
+                  <svg
+                    aria-hidden="true"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.7"
+                  >
+                    <path d="m21 11-9 9a6 6 0 0 1-8.5-8.5l10-10a4 4 0 0 1 5.7 5.7l-10 10a2 2 0 0 1-2.8-2.8L16 5" />
+                  </svg>{" "}
+                  Attach Files
+                </button>
+                <span className="attachment-count">
+                  Attachments ({attachments.length})
+                </span>
               </div>
-              <p id="attachment-help" className="attachment-help">Up to 3 files · 5 MB total · JPG, PNG, WebP, PDF, TXT</p>
-              <p id="attachment-error" className="form-error" role="status">{fileError}</p>
-              {attachments.length > 0 && <ul className="attachment-list">{attachments.map((file, index) => <li key={`${file.name}-${index}`}><span>{file.name}</span><button type="button" aria-label={`Remove ${file.name}`} disabled={isSubmitting} onClick={() => { setAttachments(files => files.filter((_, item) => item !== index)); if (fileInput.current) fileInput.current.value = ""; }}>×</button></li>)}</ul>}
-              <button className="gold-button" disabled={isSubmitting}>
-                {isSubmitting ? "Sending…" : "Send"}
+              <p id="attachment-help" className="attachment-help">
+                Up to 3 files · 5 MB total · JPG, PNG, WebP, PDF, TXT
+              </p>
+              <p id="attachment-error" className="form-error" role="status">
+                {fileError}
+              </p>
+              {attachments.length > 0 && (
+                <ul className="attachment-list">
+                  {attachments.map((file, index) => (
+                    <li key={`${file.name}-${index}`}>
+                      <span>{file.name}</span>
+                      <button
+                        type="button"
+                        aria-label={`Remove ${file.name}`}
+                        disabled={isSubmitting}
+                        onClick={() => {
+                          setAttachments((files) =>
+                            files.filter((_, item) => item !== index),
+                          );
+                          if (fileInput.current) fileInput.current.value = "";
+                        }}
+                      >
+                        ×
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <button
+                className="about-button about-button-dark"
+                disabled={isSubmitting}
+              >
+                {isSubmitting
+                  ? "Sending…"
+                  : application
+                    ? "Send application ↗"
+                    : "Send message ↗"}
               </button>
               <p
                 role="status"
@@ -173,29 +259,14 @@ export default function ContactSection({
             </form>
           </div>
           <div className="contact-details">
-            {variant === "page" ? (
-              <>
-                <h2 className="font-script">Better yet, see us in person!</h2>
-                <p>
-                  We love our customers, so feel free to visit during normal
-                  business hours.
-                </p>
-              </>
-            ) : (
-              <>
-                <h2 className="font-script">Cancellation Policy</h2>
-                <p>{CANCELLATION_POLICY}</p>
-              </>
-            )}
-            <h2 className="font-script">
-              {variant === "home" ? "Shanzo Salon" : SITE_NAME}
-            </h2>
+            <p className="about-label">Plan your visit</p>
+            <h2 className="site-form-title">Shanzo Salon</h2>
             <address>
               {ADDRESS}
               <br />
               <a href={PHONE_HREF}>{PHONE}</a>
             </address>
-            <h2 className="font-script">Hours</h2>
+            <h3 className="site-details-title">Opening hours</h3>
             {variant === "home" ? (
               <details className="home-hours" open>
                 <summary>
@@ -248,6 +319,8 @@ export default function ContactSection({
                 </tbody>
               </table>
             )}
+            <h3 className="site-details-title">Cancellation policy</h3>
+            <p>{CANCELLATION_POLICY}</p>
           </div>
         </div>
       </div>

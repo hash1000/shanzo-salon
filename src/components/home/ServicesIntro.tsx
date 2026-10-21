@@ -19,13 +19,9 @@ export default function ServicesIntro() {
         </video>
       </div>
       <div className="services-copy">
-        <h2 className="section-title font-script">Expert NAIL SERVICES</h2>
-        <p>
-          At Shanzo Salon, we specialize in the latest nail trends and
-          techniques. Our skilled nail artists are dedicated to providing a
-          personalized experience that enhances the beauty of your hands and
-          nails.
-        </p>
+        <h2 className="section-title font-script">A little time, beautifully yours.</h2>
+        <p>Hair, nails, and waxing for men, women, and kids, with care shaped around you.</p>
+        <p>A warm welcome awaits at Shanzo Salon, 67 W Chicago Ave, Chicago.</p>
       </div>
     </section>
   );

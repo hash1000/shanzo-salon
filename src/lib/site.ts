@@ -1,12 +1,13 @@
-export const SITE_NAME = "Gold Coast Beauty Spa";
-export const ADDRESS = "67 West Chicago Avenue, Chicago, IL, USA";
+export const SITE_NAME = "Shanzo Salon";
+export const ADDRESS = "67 W Chicago Ave, Chicago, IL 60654";
 export const PHONE = "+1 (312) 754-0191";
 export const PHONE_HREF = "tel:+13127540191";
-export const BOOKING_URL = 
+export const BOOKING_URL =
   "https://goldcoastbeautybyshanzo.glossgenius.com/book";
+// Add verified salon profiles here; empty values are never rendered as links.
 export const SOCIALS = {
-  instagram: "https://www.instagram.com/your-salon",
-  tiktok: "https://www.tiktok.com/@your-salon",
+  instagram: "https://www.instagram.com/goldcoast.beauty",
+  tiktok: "",
 };
 export const CANCELLATION_POLICY =
   "Cancellations accepted up to 24 hours before the scheduled service. Within 24 hours of the service, cancellations will be charged 50% of the scheduled cost.";
@@ -22,6 +23,7 @@ export const HOURS = [
 export const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
+  { label: "Team", href: "/team" },
   { label: "Gallery", href: "/gallery" },
   { label: "Contact", href: "/contact" },
 ];
