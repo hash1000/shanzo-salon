@@ -14,6 +14,23 @@ export const metadata: Metadata = {
   openGraph: { title: "A little time, beautifully yours | Shanzo Salon", description: "Personal care in the heart of Chicago. Get to know our salon.", images: [{ url: "/images/salon-reception.webp", alt: "Shanzo Salon reception and chandelier" }] },
 };
 
+const images = {
+  hero: { src: "/images/salon-reception.webp", alt: "Shanzo Salon reception desk beneath a crystal chandelier" },
+  story: { src: "/images/salon-overview.webp", alt: "Nail stations and pedicure seating at Shanzo Salon" },
+  detail: { src: "/images/gold-faucet.webp", alt: "Fresh towels and a sculptural vase beside a gold faucet" },
+};
+const services = [
+  { number: "01", name: "Hair", description: "From a thoughtful trim to a new shape, we create hair that suits your features, your routine, and the way you want to feel.", detail: "Shape. Movement. You." },
+  { number: "02", name: "Nails", description: "Considered colour, careful shaping, and a polished finish. Small details that make everyday moments feel a little more put together.", detail: "Care in every detail." },
+  { number: "03", name: "Waxing", description: "Attentive waxing with your comfort in mind. We take our time, explain the process, and help you feel at ease.", detail: "A softer kind of care." },
+];
+const reasons = [
+  { icon: Scissors, title: "Skilled stylists", text: "A practiced eye and a thoughtful approach." },
+  { icon: Leaf, title: "Quality products", text: "Chosen with your hair and skin in mind." },
+  { icon: Sparkles, title: "A clean, calm space", text: "Room to settle in and slow down." },
+  { icon: HeartHandshake, title: "Personal attention", text: "We listen before we begin." },
+];
+
 const team = [
   { name: "Molly Sproles-Barbian", initials: "MS", service: "Hair Stylist", image: "/molly-sproles-Barbian(Hair Stylist).png" },
   { name: "Genean Michele", initials: "GD", service: "Hair Stylist", image: null },
