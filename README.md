@@ -2,6 +2,87 @@
 
 Run locally: `npm install`, then `npm run dev`.
 
+## Live hours and owner admin
+
+Public QR destination: `https://shanzosalon.com/hours`. Owner login: `/admin/login`.
+The admin is not linked in the public navigation or footer and is marked noindex.
+
+**The supplied JSON schedules and public call number are placeholders. Replace
+these before publishing.** Contact links remain in `src/data/walk-in-hours.ts`.
+Hours now live in `data/walk-in-hours.json`; do not edit schedules in TypeScript.
+
+### Setup (in order)
+
+1. Use a VPS or Node server with a **persistent writable disk**. Set up HTTPS for
+   production; the session cookie is secure in production and requires HTTPS.
+2. Copy the entries from `.env.example` into your existing ignored `.env.local`
+   (preserve existing mail configuration). Set `ADMIN_EMAIL` and a long, unique
+   `ADMIN_PASSWORD`. Do not use the example values and do not use `NEXT_PUBLIC_`.
+   Quote the password, e.g. `ADMIN_PASSWORD="your-password"`; an unquoted `#`
+   starts a comment and truncates the password. Restart `npm run dev` (or the
+   production Node process) after editing credentials, which also clears any
+   in-memory login lockout. The example session secret is rejected until replaced.
+3. Run `openssl rand -hex 32` locally and set its output as `SESSION_SECRET`.
+   Use at least 32 random characters. Keep all credentials out of version control.
+   Changing the secret, email, or password invalidates existing sessions.
+4. Set `HOURS_DATA_PATH` to an absolute persistent path, e.g.
+   `/var/lib/shanzo/walk-in-hours.json`, and seed it from `data/walk-in-hours.json`.
+   The server user must have read/write access to the file and its parent folder
+   (atomic saves create a temporary sibling and rename it). If omitted, the path
+   defaults to `data/walk-in-hours.json` relative to the app working directory.
+   Keep the live file outside release folders so deployments do not overwrite it;
+   include it in your server backups. Missing or invalid JSON safely closes both
+   services and shows an unconfirmed-availability banner. A save recreates the file.
+5. If using a trusted reverse proxy, configure it to **replace** `X-Forwarded-For`
+   with the real client address, then set `ADMIN_TRUST_PROXY_HEADERS=true`.
+   Otherwise keep it false: all login attempts share a conservative rate-limit
+   bucket. Five failed attempts lock that address/bucket for 15 minutes. Limits
+   are in memory, reset on restart, and are per Node process; use a single app
+   instance or enforce an additional limit at your proxy for multiple instances.
+6. Replace the placeholder call number in `src/data/walk-in-hours.ts`.
+7. Run `npm run lint`, `node --test tests/hours-admin.test.mjs`, and `npm run build`.
+   Deploy and start/restart the Node server using your existing hosting workflow.
+8. Open `/admin/login`, sign in, enter the real hours, and press **Save changes**.
+   Sessions last seven days; Logout clears the cookie. Check `/hours` on a phone.
+
+### Updating hours
+
+- Select Hair or Nails. Toggle walk-ins for each day and enter local 24-hour open
+  and close times. Add split shifts as needed. Closing must follow opening on the
+  same day; overlapping ranges are rejected. Shortcuts copy a weekly schedule or
+  apply Monday to every day. Notes are separate for each service.
+- Quick closures stage today's Chicago-date override. Reopen removes that
+  service's one-off closure and returns to its weekly hours (which may still be
+  unavailable). If closing replaced custom hours for today, re-enter those hours
+  as an override when reopening.
+- Set a banner announcement, or leave it blank to hide it.
+- For a one-off date, choose Hair and/or Nails, toggle available/closed, enter any
+  hours, and press **Add / replace override** to stage it. This merges with other
+  services already overridden for that date. Delete removes the entire date's
+  override. Past overrides are ignored and removed on the next save.
+- Review the shared-card preview, then press the single **Save changes** button.
+  Nothing is published until saved. The server updates `lastUpdated` automatically,
+  writes atomically, and calls `revalidatePath("/hours")`. No redeploy is needed
+  for admin edits. Reload an already-open public page to see the new hours/status.
+  Browser navigation/closing warns about unsaved changes; Logout also confirms.
+
+The server reads and validates JSON fresh on every call. `/hours` uses
+`dynamic = "force-dynamic"`, with Chicago timezone and daylight saving handling
+shared with the preview. Cache Components and dependent partial prefetching were
+turned off because Next 16.4 does not support `force-dynamic` with them enabled.
+The stack and dependencies are unchanged.
+
+Manual JSON edits use the same shape as before: `timezone`, ISO `lastUpdated`,
+optional `announcement`, `services.hair/nails.weekly` (mon–sun), optional service
+`note`, and optional `overrides`. Each day is `null`, `{ "open": "10:00", "close":
+"19:00" }`, or a nonempty array of ranges. Use one override per `YYYY-MM-DD` date;
+omitted services retain the weekly schedule. Update `lastUpdated` for manual edits.
+
+**Hosting note:** Saving to a file requires a persistent writable disk (VPS or a
+Node server). Vercel/Netlify serverless deployment files may be read-only, temporary
+files do not persist reliably across instances, and files reset on redeploy. This
+file-backed admin is intended for a persistent Node deployment, not serverless.
+
 ## Contact email setup
 
 The React contact form posts Name, Email, Message and optional Attachments to

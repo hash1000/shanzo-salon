@@ -61,6 +61,7 @@ export function SiteFooter() {
         </div>
         <div className="grid content-start gap-4">
           <SocialLinks />
+          <Link href="/hours" prefetch={false}>Walk-in hours</Link>
           <Link href="/apply">
             Careers{" "}
             <ArrowUpRight className="inline" size={14} aria-hidden="true" />

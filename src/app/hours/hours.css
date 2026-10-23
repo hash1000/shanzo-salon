@@ -1,0 +1,17 @@
+.walk-hours { max-width: 960px; padding-block: 32px; color: #302b27; }
+.walk-heading { margin-bottom: 28px; }
+.walk-heading .about-label { margin-bottom: 8px; font-size: 12px; }
+.walk-heading h1 { font-size: clamp(48px, 8vw, 72px); line-height: 1.15; }
+.walk-announcement { padding: 16px 20px; margin-bottom: 24px; background: #eee5d5; border-left: 4px solid #80603a; font-weight: 600; }
+.walk-card { padding: 24px 20px; background: #fdfbf7; border: 1px solid #cfc4b4; border-radius: 32px 8px 8px 8px; }
+.about-luxury .walk-card h2 { font-family: var(--about-sans), Arial, sans-serif; font-size: 28px; font-weight: 700; letter-spacing: 0; }
+.walk-badge { display: inline-block; margin-block: 18px; padding: 6px 12px; border-radius: 20px; background: #eee9e0; color: #493e30; font-size: 14px; font-weight: 700; }
+.walk-open { background: #deeddf; color: #214b2c; }
+.walk-today-label, .walk-week-label { font-size: 14px; font-weight: 600; }
+.walk-today { font-size: clamp(22px, 5vw, 28px); font-weight: 700; line-height: 1.45; margin-block: 6px 24px; font-variant-numeric: tabular-nums; }
+.walk-week-label { padding-bottom: 10px; }
+.walk-row { display: grid; grid-template-columns: minmax(85px, 1fr) minmax(0, 1.7fr); gap: 8px; padding: 12px 8px; border-top: 1px solid #ded5c7; font-size: 14px; }
+.walk-row dd { text-align: right; font-variant-numeric: tabular-nums; }
+.walk-current { background: #eee5d5; font-weight: 700; border-radius: 4px; }
+.walk-hours .about-button { min-height: 48px; font-size: 15px; }
+@media (min-width: 768px) { .walk-hours { padding-block: 48px; } .walk-card { padding: 28px; } }
