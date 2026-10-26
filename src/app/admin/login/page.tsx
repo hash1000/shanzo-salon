@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import LoginForm from "@/components/admin/LoginForm";
 import { adminConfigured } from "@/lib/admin-session";
 
