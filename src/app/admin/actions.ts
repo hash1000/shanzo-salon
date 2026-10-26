@@ -23,6 +23,7 @@ export async function login(input: unknown): Promise<{ error: string }> {
   const emailMatches = equalSecret(parsed.success ? parsed.data.email.toLowerCase() : "", ADMIN_EMAIL.toLowerCase());
   const passwordMatches = verifyAdminPassword(parsed.success ? parsed.data.password : "");
   if (!configured || !parsed.success || !emailMatches || !passwordMatches) {
+    console.log(`Failed login attempt from ${ip} (configured=${configured}, emailMatches=${emailMatches}, passwordMatches=${passwordMatches})`);
     recordLoginFailure(ip);
     return { error: "Invalid email or password" };
   }
