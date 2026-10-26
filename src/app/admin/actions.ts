@@ -3,6 +3,7 @@
 import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { ADMIN_EMAIL, verifyAdminPassword } from "@/lib/admin-credentials";
 import { requireAdmin } from "@/lib/admin-auth";
 import { adminConfigured, createSession, equalSecret, SESSION_COOKIE, SESSION_SECONDS } from "@/lib/admin-session";
 import { clearLoginFailures, loginLocked, recordLoginFailure } from "@/lib/login-rate-limit";
@@ -19,8 +20,8 @@ export async function login(input: unknown): Promise<{ error: string }> {
   if (loginLocked(ip)) return { error: "Too many failed attempts. Please try again in 15 minutes." };
   const parsed = loginSchema.safeParse(input);
   const configured = adminConfigured();
-  const emailMatches = equalSecret(parsed.success ? parsed.data.email.toLowerCase() : "", process.env.ADMIN_EMAIL?.trim().toLowerCase() || "info@shanzosalon.com");
-  const passwordMatches = equalSecret(parsed.success ? parsed.data.password : "", process.env.ADMIN_PASSWORD || "info@shanzosalon#2026");
+  const emailMatches = equalSecret(parsed.success ? parsed.data.email.toLowerCase() : "", ADMIN_EMAIL.toLowerCase());
+  const passwordMatches = verifyAdminPassword(parsed.success ? parsed.data.password : "");
   if (!configured || !parsed.success || !emailMatches || !passwordMatches) {
     recordLoginFailure(ip);
     return { error: "Invalid email or password" };

@@ -1,12 +1,13 @@
 import "server-only";
 import { createHash, createHmac, timingSafeEqual } from "node:crypto";
+import { ADMIN_EMAIL, ADMIN_PASSWORD_HASH } from "@/lib/admin-credentials";
 
 export const SESSION_COOKIE = "shanzo_admin";
 export const SESSION_SECONDS = 7 * 24 * 60 * 60;
 
 export function adminConfigured() {
   const secret = process.env.SESSION_SECRET;
-  return Boolean(process.env.ADMIN_EMAIL && process.env.ADMIN_PASSWORD && secret && secret.length >= 32 && !secret.startsWith("replace-"));
+  return Boolean(secret && secret.length >= 32 && !secret.startsWith("replace-"));
 }
 export function equalSecret(left: string, right: string) {
   return timingSafeEqual(createHash("sha256").update(left).digest(), createHash("sha256").update(right).digest());
@@ -14,7 +15,7 @@ export function equalSecret(left: string, right: string) {
 function signature(payload: string) {
   // Rotating the password/email also revokes existing sessions.
   return createHmac("sha256", process.env.SESSION_SECRET!)
-    .update(JSON.stringify([process.env.ADMIN_EMAIL?.trim().toLowerCase(), process.env.ADMIN_PASSWORD, payload])).digest("hex");
+    .update(JSON.stringify([ADMIN_EMAIL, ADMIN_PASSWORD_HASH, payload])).digest("hex");
 }
 export function createSession(now = Date.now()) {
   if (!adminConfigured()) throw new Error("Admin login is not configured.");

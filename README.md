@@ -16,15 +16,16 @@ Hours now live in `data/walk-in-hours.json`; do not edit schedules in TypeScript
 1. Use a VPS or Node server with a **persistent writable disk**. Set up HTTPS for
    production; the session cookie is secure in production and requires HTTPS.
 2. Copy the entries from `.env.example` into your existing ignored `.env.local`
-   (preserve existing mail configuration). Set `ADMIN_EMAIL` and a long, unique
-   `ADMIN_PASSWORD`. Do not use the example values and do not use `NEXT_PUBLIC_`.
-   Quote the password, e.g. `ADMIN_PASSWORD="your-password"`; an unquoted `#`
-   starts a comment and truncates the password. Restart `npm run dev` (or the
-   production Node process) after editing credentials, which also clears any
-   in-memory login lockout. The example session secret is rejected until replaced.
+   (preserve existing mail configuration). Only `SESSION_SECRET` is required in
+   the environment for admin authentication. Never use a `NEXT_PUBLIC_` prefix.
+   Admin email and the scrypt `salt:hash` live in `src/lib/admin-credentials.ts`,
+   protected by `server-only`. Replace `PASTE_HASH_HERE` with a valid hash before
+   deploying; the placeholder rejects every password. Use a hex salt string and
+   a 64-byte derived key encoded as hex (`scryptSync(input, salt, 64)`). Never put
+   a plain-text password in source. Credential changes require a rebuild/restart.
 3. Run `openssl rand -hex 32` locally and set its output as `SESSION_SECRET`.
-   Use at least 32 random characters. Keep all credentials out of version control.
-   Changing the secret, email, or password invalidates existing sessions.
+   Use at least 32 random characters. Keep the secret out of version control.
+   Changing the secret, configured email, or password hash invalidates sessions.
 4. Set `HOURS_DATA_PATH` to an absolute persistent path, e.g.
    `/var/lib/shanzo/walk-in-hours.json`, and seed it from `data/walk-in-hours.json`.
    The server user must have read/write access to the file and its parent folder

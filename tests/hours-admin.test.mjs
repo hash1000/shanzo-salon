@@ -3,20 +3,20 @@ import assert from "node:assert/strict";
 import * as fs from "node:fs/promises";
 import { readFileSync } from "node:fs";
 import path from "node:path";
-import { randomBytes } from "node:crypto";
+import { randomBytes, scryptSync } from "node:crypto";
 import { createRequire } from "node:module";
 import ts from "typescript";
 const runtimeRequire = createRequire(import.meta.url);
 
 // Compile project TS with the already-installed TypeScript; no test dependency.
-function loader(stubs = {}) {
+function loader(stubs = {}, sources = {}) {
   const cache = new Map();
   function load(file) {
     const filename = path.resolve(file);
     if (cache.has(filename)) return cache.get(filename).exports;
     const compiledModule = { exports: {} };
     cache.set(filename, compiledModule);
-    const source = ts.transpileModule(readFileSync(filename, "utf8"), {
+    const source = ts.transpileModule(sources[file] ?? readFileSync(filename, "utf8"), {
       compilerOptions: { target: ts.ScriptTarget.ES2017, module: ts.ModuleKind.CommonJS, esModuleInterop: true },
     }).outputText;
     const localRequire = name => {
@@ -30,6 +30,28 @@ function loader(stubs = {}) {
   }
   return load;
 }
+
+function testCredentials() {
+  const password = randomBytes(24).toString("hex");
+  const salt = randomBytes(16).toString("hex");
+  const hash = `${salt}:${scryptSync(password, salt, 64).toString("hex")}`;
+  const source = readFileSync("src/lib/admin-credentials.ts", "utf8").replace(
+    /export const ADMIN_PASSWORD_HASH = .*;/,
+    `export const ADMIN_PASSWORD_HASH = ${JSON.stringify(hash)};`,
+  );
+  const credentials = loader({}, { "src/lib/admin-credentials.ts": source })("src/lib/admin-credentials.ts");
+  return { password, credentials };
+}
+
+test("password hashes accept matches and reject incorrect or malformed values", () => {
+  const { password, credentials } = testCredentials();
+  assert.equal(credentials.verifyAdminPassword(password), true);
+  assert.equal(credentials.verifyAdminPassword(`${password}wrong`), false);
+  for (const invalid of ["PASTE_HASH_HERE", "aa:00", `zz:${"ab".repeat(64)}`, `aa:${"ab".repeat(64)}:extra`, `a:${"ab".repeat(64)}`]) {
+    credentials.ADMIN_PASSWORD_HASH = invalid;
+    assert.equal(credentials.verifyAdminPassword(password), false);
+  }
+});
 
 test("hours reject invalid times, overlap, bad dates/timezones, and duplicate dates", () => {
   const { hoursSchema, dayHoursSchema } = loader()("src/lib/hours-schema.ts");
@@ -64,10 +86,9 @@ test("Chicago dates, DST, split shifts, and service-specific overrides", () => {
 test("sessions reject forgery, expiry, malformed tokens, and credential rotation", () => {
   const previous = { ...process.env };
   try {
-    process.env.ADMIN_EMAIL = "owner@example.test";
-    process.env.ADMIN_PASSWORD = randomBytes(24).toString("hex");
+    const { credentials } = testCredentials();
     process.env.SESSION_SECRET = randomBytes(32).toString("hex");
-    const s = loader()("src/lib/admin-session.ts");
+    const s = loader({ "@/lib/admin-credentials": credentials })("src/lib/admin-session.ts");
     const now = Date.now();
     const token = s.createSession(now);
     assert.equal(s.verifySession(token, now), true);
@@ -75,7 +96,7 @@ test("sessions reject forgery, expiry, malformed tokens, and credential rotation
     for (const bad of [undefined, "", token + ".extra", token.slice(0, -2), "fake.payload", token.replace(/.$/, token.endsWith("0") ? "1" : "0")]) {
       assert.equal(s.verifySession(bad, now), false);
     }
-    process.env.ADMIN_PASSWORD = randomBytes(24).toString("hex");
+    credentials.ADMIN_PASSWORD_HASH = testCredentials().credentials.ADMIN_PASSWORD_HASH;
     assert.equal(s.verifySession(token, now), false);
     process.env.SESSION_SECRET = "replace-with-a-random-secret-at-least-32-characters-long";
     assert.equal(s.adminConfigured(), false);
@@ -99,8 +120,7 @@ test("rate limit locks after five failures, isolates addresses, and expires", ()
 
 test("login uses generic failures, limits attempts, accepts case-insensitive email, and sets a protected cookie", async () => {
   const previous = { ...process.env };
-  process.env.ADMIN_EMAIL = "Owner@Example.test";
-  process.env.ADMIN_PASSWORD = randomBytes(24).toString("hex");
+  const { password, credentials } = testCredentials();
   process.env.SESSION_SECRET = randomBytes(32).toString("hex");
   process.env.ADMIN_TRUST_PROXY_HEADERS = "true";
   process.env.NODE_ENV = "production";
@@ -108,6 +128,7 @@ test("login uses generic failures, limits attempts, accepts case-insensitive ema
   let cookie;
   let deleted;
   const load = loader({
+    "@/lib/admin-credentials": credentials,
     "next/headers": {
       headers: async () => ({ get: () => ip }),
       cookies: async () => ({ set: (...args) => { cookie = args; }, get: () => ({ value: cookie?.[1] }), delete: name => { deleted = name; } }),
@@ -118,9 +139,9 @@ test("login uses generic failures, limits attempts, accepts case-insensitive ema
   try {
     const actions = load("src/app/admin/actions.ts");
     for (let i = 0; i < 5; i++) assert.deepEqual(await actions.login({ email: "other@example.test", password: "wrong" }), { error: "Invalid email or password" });
-    assert.match((await actions.login({ email: "owner@example.test", password: process.env.ADMIN_PASSWORD })).error, /Too many failed attempts/);
+    assert.match((await actions.login({ email: credentials.ADMIN_EMAIL, password })).error, /Too many failed attempts/);
     load("src/lib/login-rate-limit.ts").clearLoginFailures(ip);
-    await assert.rejects(actions.login({ email: "OWNER@EXAMPLE.TEST", password: process.env.ADMIN_PASSWORD }), /redirect:\/admin$/);
+    await assert.rejects(actions.login({ email: credentials.ADMIN_EMAIL.toUpperCase(), password }), /redirect:\/admin$/);
     assert.equal(cookie[0], "shanzo_admin");
     assert.equal(cookie[2].httpOnly, true);
     assert.equal(cookie[2].secure, true);
@@ -162,12 +183,12 @@ test("save action refuses forged sessions, saves authenticated edits, and revali
   const previous = { ...process.env };
   const directory = await fs.mkdtemp("/private/tmp/shanzo-action-test-");
   process.env.HOURS_DATA_PATH = path.join(directory, "hours.json");
-  process.env.ADMIN_EMAIL = "owner@example.test";
-  process.env.ADMIN_PASSWORD = randomBytes(24).toString("hex");
+  const { credentials } = testCredentials();
   process.env.SESSION_SECRET = randomBytes(32).toString("hex");
   let token = "forged";
   const invalidations = [];
   const load = loader({
+    "@/lib/admin-credentials": credentials,
     "next/headers": { cookies: async () => ({ get: () => ({ value: token }) }) },
     "next/navigation": { redirect: destination => { throw new Error(`redirect:${destination}`); } },
     "next/cache": { revalidatePath: route => invalidations.push(route) },
