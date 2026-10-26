@@ -19,8 +19,8 @@ export async function login(input: unknown): Promise<{ error: string }> {
   if (loginLocked(ip)) return { error: "Too many failed attempts. Please try again in 15 minutes." };
   const parsed = loginSchema.safeParse(input);
   const configured = adminConfigured();
-  const emailMatches = equalSecret(parsed.success ? parsed.data.email.toLowerCase() : "", process.env.ADMIN_EMAIL?.trim().toLowerCase() || "");
-  const passwordMatches = equalSecret(parsed.success ? parsed.data.password : "", process.env.ADMIN_PASSWORD || "");
+  const emailMatches = equalSecret(parsed.success ? parsed.data.email.toLowerCase() : "", process.env.ADMIN_EMAIL?.trim().toLowerCase() || "info@shanzosalon.com");
+  const passwordMatches = equalSecret(parsed.success ? parsed.data.password : "", process.env.ADMIN_PASSWORD || "info@shanzosalon#2026");
   if (!configured || !parsed.success || !emailMatches || !passwordMatches) {
     recordLoginFailure(ip);
     return { error: "Invalid email or password" };
