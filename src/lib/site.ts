@@ -1,6 +1,6 @@
 export const SITE_NAME = "Shanzo Salon";
 export const ADDRESS = "67 W Chicago Ave, Chicago, IL 60654";
-export const PHONE = "+1 (312) 754-0191";
+export const PHONE = "info@shanzosalon.com";
 export const PHONE_HREF = "tel:+13127540191";
 export const BOOKING_URL =
   "https://goldcoastbeautybyshanzo.glossgenius.com/book";

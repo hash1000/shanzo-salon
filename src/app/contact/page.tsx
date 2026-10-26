@@ -7,7 +7,7 @@ import ContactSection from "@/components/home/ContactSection";
 export const metadata: Metadata = {
   title: "Contact | Shanzo Salon",
   description:
-    "Contact Shanzo Salon at 67 W Chicago Ave, Chicago, IL 60654. Call +1 (312) 754-0191. Open 10 AM–7 PM daily.",
+    "Contact Shanzo Salon at 67 W Chicago Ave, Chicago, IL 60654. Call info@shanzosalon.com. Open 10 AM–7 PM daily.",
 };
 export default function ContactPage() {
   return (
