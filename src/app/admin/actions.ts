@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { ADMIN_EMAIL, verifyAdminPassword } from "@/lib/admin-credentials";
 import { requireAdmin } from "@/lib/admin-auth";
-import { adminConfigured, createSession, equalSecret, SESSION_COOKIE, SESSION_SECONDS } from "@/lib/admin-session";
+import { createSession, equalSecret, SESSION_COOKIE, SESSION_SECONDS } from "@/lib/admin-session";
 import { clearLoginFailures, loginLocked, recordLoginFailure } from "@/lib/login-rate-limit";
 import { hoursSchema, loginSchema } from "@/lib/hours-schema";
 import { getLocalNow } from "@/lib/walk-in-hours";
@@ -19,11 +19,9 @@ export async function login(input: unknown): Promise<{ error: string }> {
     ? requestHeaders.get("x-forwarded-for")?.split(",")[0].trim().slice(0, 128) || "unknown" : "unknown";
   if (loginLocked(ip)) return { error: "Too many failed attempts. Please try again in 15 minutes." };
   const parsed = loginSchema.safeParse(input);
-  const configured = adminConfigured();
-  const emailMatches = equalSecret(parsed.success ? parsed.data.email.toLowerCase() : "", ADMIN_EMAIL.toLowerCase());
+  const emailMatches = equalSecret(parsed.success ? parsed.data.email.trim().toLowerCase() : "", ADMIN_EMAIL.toLowerCase());
   const passwordMatches = verifyAdminPassword(parsed.success ? parsed.data.password : "");
-  if (!configured || !parsed.success || !emailMatches || !passwordMatches) {
-    console.log(`Failed login attempt from ${ip} (configured=${configured}, emailMatches=${emailMatches}, passwordMatches=${passwordMatches})`);
+  if (!parsed.success || !emailMatches || !passwordMatches) {
     recordLoginFailure(ip);
     return { error: "Invalid email or password" };
   }

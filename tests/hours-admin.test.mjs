@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import * as fs from "node:fs/promises";
 import { readFileSync } from "node:fs";
 import path from "node:path";
-import { randomBytes, scryptSync } from "node:crypto";
+import { randomBytes } from "node:crypto";
 import { createRequire } from "node:module";
 import ts from "typescript";
 const runtimeRequire = createRequire(import.meta.url);
@@ -33,24 +33,22 @@ function loader(stubs = {}, sources = {}) {
 
 function testCredentials() {
   const password = randomBytes(24).toString("hex");
-  const salt = randomBytes(16).toString("hex");
-  const hash = `${salt}:${scryptSync(password, salt, 64).toString("hex")}`;
   const source = readFileSync("src/lib/admin-credentials.ts", "utf8").replace(
-    /export const ADMIN_PASSWORD_HASH = .*;/,
-    `export const ADMIN_PASSWORD_HASH = ${JSON.stringify(hash)};`,
+    /export const ADMIN_PASSWORD = .*;/,
+    `export const ADMIN_PASSWORD = ${JSON.stringify(password)};`,
+  ).replace(
+    /export const SESSION_SECRET = .*;/,
+    `export const SESSION_SECRET = ${JSON.stringify(randomBytes(32).toString("hex"))};`,
   );
   const credentials = loader({}, { "src/lib/admin-credentials.ts": source })("src/lib/admin-credentials.ts");
   return { password, credentials };
 }
 
-test("password hashes accept matches and reject incorrect or malformed values", () => {
+test("password comparison accepts matches and rejects incorrect input", () => {
   const { password, credentials } = testCredentials();
   assert.equal(credentials.verifyAdminPassword(password), true);
   assert.equal(credentials.verifyAdminPassword(`${password}wrong`), false);
-  for (const invalid of ["PASTE_HASH_HERE", "aa:00", `zz:${"ab".repeat(64)}`, `aa:${"ab".repeat(64)}:extra`, `a:${"ab".repeat(64)}`]) {
-    credentials.ADMIN_PASSWORD_HASH = invalid;
-    assert.equal(credentials.verifyAdminPassword(password), false);
-  }
+  assert.equal(credentials.verifyAdminPassword(""), false);
 });
 
 test("hours reject invalid times, overlap, bad dates/timezones, and duplicate dates", () => {
@@ -87,7 +85,6 @@ test("sessions reject forgery, expiry, malformed tokens, and credential rotation
   const previous = { ...process.env };
   try {
     const { credentials } = testCredentials();
-    process.env.SESSION_SECRET = randomBytes(32).toString("hex");
     const s = loader({ "@/lib/admin-credentials": credentials })("src/lib/admin-session.ts");
     const now = Date.now();
     const token = s.createSession(now);
@@ -96,13 +93,11 @@ test("sessions reject forgery, expiry, malformed tokens, and credential rotation
     for (const bad of [undefined, "", token + ".extra", token.slice(0, -2), "fake.payload", token.replace(/.$/, token.endsWith("0") ? "1" : "0")]) {
       assert.equal(s.verifySession(bad, now), false);
     }
-    credentials.ADMIN_PASSWORD_HASH = testCredentials().credentials.ADMIN_PASSWORD_HASH;
+    credentials.ADMIN_PASSWORD = testCredentials().credentials.ADMIN_PASSWORD;
     assert.equal(s.verifySession(token, now), false);
-    process.env.SESSION_SECRET = "replace-with-a-random-secret-at-least-32-characters-long";
-    assert.equal(s.adminConfigured(), false);
-    assert.throws(() => s.createSession(), /not configured/);
-    delete process.env.SESSION_SECRET;
-    assert.equal(s.verifySession(token, now), false);
+    const rotatedToken = s.createSession(now);
+    credentials.SESSION_SECRET = randomBytes(32).toString("hex");
+    assert.equal(s.verifySession(rotatedToken, now), false);
     assert.equal(s.equalSecret("a", "a"), true);
     assert.equal(s.equalSecret("a", "longer"), false);
   } finally { process.env = previous; }
@@ -121,7 +116,6 @@ test("rate limit locks after five failures, isolates addresses, and expires", ()
 test("login uses generic failures, limits attempts, accepts case-insensitive email, and sets a protected cookie", async () => {
   const previous = { ...process.env };
   const { password, credentials } = testCredentials();
-  process.env.SESSION_SECRET = randomBytes(32).toString("hex");
   process.env.ADMIN_TRUST_PROXY_HEADERS = "true";
   process.env.NODE_ENV = "production";
   const ip = `test-${randomBytes(8).toString("hex")}`;
@@ -141,7 +135,7 @@ test("login uses generic failures, limits attempts, accepts case-insensitive ema
     for (let i = 0; i < 5; i++) assert.deepEqual(await actions.login({ email: "other@example.test", password: "wrong" }), { error: "Invalid email or password" });
     assert.match((await actions.login({ email: credentials.ADMIN_EMAIL, password })).error, /Too many failed attempts/);
     load("src/lib/login-rate-limit.ts").clearLoginFailures(ip);
-    await assert.rejects(actions.login({ email: credentials.ADMIN_EMAIL.toUpperCase(), password }), /redirect:\/admin$/);
+    await assert.rejects(actions.login({ email: `  ${credentials.ADMIN_EMAIL.toUpperCase()}  `, password }), /redirect:\/admin$/);
     assert.equal(cookie[0], "shanzo_admin");
     assert.equal(cookie[2].httpOnly, true);
     assert.equal(cookie[2].secure, true);
@@ -184,7 +178,6 @@ test("save action refuses forged sessions, saves authenticated edits, and revali
   const directory = await fs.mkdtemp("/private/tmp/shanzo-action-test-");
   process.env.HOURS_DATA_PATH = path.join(directory, "hours.json");
   const { credentials } = testCredentials();
-  process.env.SESSION_SECRET = randomBytes(32).toString("hex");
   let token = "forged";
   const invalidations = [];
   const load = loader({
