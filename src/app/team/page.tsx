@@ -15,17 +15,17 @@ export const metadata: Metadata = {
 };
 
 const team = [
-  {
-    name: "Molly Sproles-Barbian",
-    initials: "MS",
-    service: "Hair Stylist",
-    image: "/molly-sproles-Barbian(Hair Stylist).png",
-    bio: [
-      "With six years of experience as a licensed hairstylist, I’ve built my career across Las Vegas, Arizona, and now Chicago, with each experience shaping my approach behind the chair.",
-      "Haircutting is where I truly shine. I love combining technical precision with creativity to create personalized cuts that complement each client’s features, style, and personality. Whether you’re looking for a fresh new look or the perfect shape to bring your current style back to life, my goal is to create hair that feels uniquely you.",
-      "Most importantly, I want every client to leave my chair feeling confident and looking their best. I’m passionate about my craft and continually stay inspired by new techniques, trends, and opportunities to elevate the experience I provide.",
-    ],
-  },
+  // {
+  //   name: "Molly Sproles-Barbian",
+  //   initials: "MS",
+  //   service: "Hair Stylist",
+  //   image: "/molly-sproles-Barbian(Hair Stylist).png",
+  //   bio: [
+  //     "With six years of experience as a licensed hairstylist, I’ve built my career across Las Vegas, Arizona, and now Chicago, with each experience shaping my approach behind the chair.",
+  //     "Haircutting is where I truly shine. I love combining technical precision with creativity to create personalized cuts that complement each client’s features, style, and personality. Whether you’re looking for a fresh new look or the perfect shape to bring your current style back to life, my goal is to create hair that feels uniquely you.",
+  //     "Most importantly, I want every client to leave my chair feeling confident and looking their best. I’m passionate about my craft and continually stay inspired by new techniques, trends, and opportunities to elevate the experience I provide.",
+  //   ],
+  // },
   {
     name: "Genean Michele",
     initials: "GD",
