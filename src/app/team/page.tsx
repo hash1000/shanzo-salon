@@ -90,13 +90,14 @@ export default function TeamPage() {
             {team.map((member) => (
               <li
                 key={member.name}
-                className={`team-member${member.bio ? " team-member-featured" : ""}`}
+                className="team-member"
+                // ${member.bio ? " team-member-featured" : ""}
               >
                 <div className={`team-portrait${!member.image ? " team-portrait-placeholder" : ""}`}>
                   {member.image ? (
                     <Image
                       src={member.image}
-                      loading={member.bio ? "eager" : "lazy"}
+                      // loading={member.bio ? "eager" : "lazy"}
                       alt={`${member.name}, ${member.service}`}
                       fill
                       sizes="(max-width: 639px) 84vw, (max-width: 900px) 35vw, 23vw"
@@ -109,17 +110,17 @@ export default function TeamPage() {
                   <span className="team-portrait-mark" aria-hidden="true"><Sparkles size={19} /></span>
                 </div>
                 <div className="team-member-content">
-                  {member.bio && <p className="team-featured-label">In the stylist’s chair</p>}
+                  {/* {member.bio && <p className="team-featured-label">In the stylist’s chair</p>} */}
                   <h2>{member.name}</h2>
                   <p className="team-member-service">{member.service}</p>
-                  {member.bio && (
+                  {/* {member.bio && (
                     <div className="team-member-bio">
                       <h3>Bio</h3>
                       {member.bio.map((paragraph) => (
                         <p key={paragraph}>{paragraph}</p>
                       ))}
                     </div>
-                  )}
+                  )} */}
                   <a href={BOOKING_URL} className="team-book-link" aria-label={`Book an appointment with ${member.name}`}>
                     Book a visit <ArrowUpRight size={16} aria-hidden="true" />
                   </a>
