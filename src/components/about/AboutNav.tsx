@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useRef, useState } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
@@ -28,7 +29,15 @@ export default function AboutNav() {
           aria-label="Shanzo Salon home"
           onClick={() => setOpen(false)}
         >
-          Gold Coast Beauty Spa
+          <Image
+            src="/images/logo.png"
+            alt="Gold Coast Beauty"
+            width={4500}
+            height={1425}
+            sizes="240px"
+            loading="eager"
+            className="site-logo"
+          />
         </Link>
         <button
           ref={toggle}

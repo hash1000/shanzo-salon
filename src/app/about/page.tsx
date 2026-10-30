@@ -33,10 +33,12 @@ const reasons = [
 
 const team = [
   { name: "Molly Sproles-Barbian", initials: "MS", service: "Hair Stylist", image: "/molly-sproles-Barbian(Hair Stylist).png" },
-  { name: "Genean Michele", initials: "GD", service: "Hair Stylist", image: null },
-  { name: "Deanna Walsh", initials: "DW", service: "Hair Stylist", image: null },
+  // { name: "Genean Michele", initials: "GD", service: "Hair Stylist", image: null },
+  // { name: "Deanna Walsh", initials: "DW", service: "Hair Stylist", image: null },
+  { name: "Violet Eliza", initials: "VE", service: "Hair Stylist", image: "/violet-eliza.png" },
+  { name: "Ruby Smizer", initials: "RS", service: "Hair Stylist", image: "/ruby-smizer.png" },
   { name: "Nina Maney", initials: "NM", service: "Hair Stylist", image: "/nina-maney(Hair Stylist).png" },
-  { name: "Dana Rivera", initials: "DR", service: "Nail Technician", image: "/dana-rivera(Nail Technician) 2026.png" },
+  // { name: "Dana Rivera", initials: "DR", service: "Nail Technician", image: "/dana-rivera(Nail Technician) 2026.png" },
   { name: "Marija Aleksic", initials: "MA", service: "Nail Technician", image: "/marija-aleksic (Nail Technician).png" },
   { name: "Melanie Ruiz", initials: "MR", service: "Esthetician", image: "/melanie-ruiz(Esthetician).png" },
 ];
@@ -52,7 +54,7 @@ export default function AboutPage() {
           <div className="about-hero-shade site-bright-shade" />
           <div className="about-wrap home-hero-content relative z-10">
             <p className="about-label text-white/85">Shanzo Salon · Chicago</p>
-            <h1 id="about-title">A little time,<br /><em>beautifully yours.</em></h1>
+            <h1 id="about-title">A little time,<br />beautifully <em>yours.</em></h1>
             <p className="about-hero-description">Personal care. Thoughtful details. A place to feel like yourself.</p>
             <a href={BOOKING_URL} className="about-button about-button-light mt-9">Book an Appointment <ArrowUpRight size={18} aria-hidden="true" /></a>
           </div>
@@ -78,7 +80,7 @@ export default function AboutPage() {
         <section className="about-services about-space" aria-labelledby="services-title">
           <div className="about-wrap">
             <AboutReveal className="mb-12 flex flex-wrap items-end justify-between gap-6">
-              <div><p className="about-label">02 / What we do</p><h2 id="services-title">The details.<br /><em>The difference.</em></h2></div>
+              <div><p className="about-label">02 / What we do</p><h2 id="services-title">The details.<br />The <em>difference.</em></h2></div>
               <span className="about-small-note">Hair · Nails · Waxing</span>
             </AboutReveal>
             <div className="grid gap-5 md:grid-cols-3">
@@ -94,9 +96,9 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <AboutReveal><section className="about-promise" aria-labelledby="promise-title"><div className="about-wrap"><p id="promise-title" className="about-label">Our promise to you</p><blockquote>“You’ll be heard, cared for,<br className="hidden sm:block" /> and never rushed.<br /><em>That’s our promise, every visit.</em>”</blockquote><span className="about-promise-signature">The Shanzo team</span></div></section></AboutReveal>
+        <AboutReveal><section className="about-promise" aria-labelledby="promise-title"><div className="about-wrap"><p id="promise-title" className="about-label">Our promise to you</p><blockquote>“You’ll be heard, cared for,<br className="hidden sm:block" /> and never rushed.<br />That’s our <em>promise,</em> every visit.”</blockquote><span className="about-promise-signature">The Shanzo team</span></div></section></AboutReveal>
 
-        <section className="about-wrap about-space text-center" aria-labelledby="visit-title"><AboutReveal><p className="about-label">Your next visit</p><h2 id="visit-title">Make a little room<br /><em>for yourself.</em></h2><p className="about-body mx-auto mt-6 max-w-md">We’d love to welcome you. Choose your appointment or get in touch.</p><div className="mt-9 flex flex-wrap justify-center gap-4"><a href={BOOKING_URL} className="about-button about-button-dark">Book an Appointment <ArrowUpRight size={17} aria-hidden="true" /></a><Link href="/contact" className="about-button about-button-outline">Contact Us <ArrowUpRight size={17} aria-hidden="true" /></Link></div></AboutReveal></section>
+        <section className="about-wrap about-space text-center" aria-labelledby="visit-title"><AboutReveal><p className="about-label">Your next visit</p><h2 id="visit-title">Make a little room<br />for <em>yourself.</em></h2><p className="about-body mx-auto mt-6 max-w-md">We’d love to welcome you. Choose your appointment or get in touch.</p><div className="mt-9 flex flex-wrap justify-center gap-4"><a href={BOOKING_URL} className="about-button about-button-dark">Book an Appointment <ArrowUpRight size={17} aria-hidden="true" /></a><Link href="/contact" className="about-button about-button-outline">Contact Us <ArrowUpRight size={17} aria-hidden="true" /></Link></div></AboutReveal></section>
 
         <section className="about-location" aria-labelledby="location-title"><div className="about-wrap grid gap-10 py-14 md:grid-cols-[1fr_1.5fr] md:items-center"><div><MapPin size={23} strokeWidth={1.4} aria-hidden="true" /><p className="about-label mt-5">Find us in Chicago</p><h2 id="location-title">Come on <em>in.</em></h2><address className="mt-5 not-italic">67 W Chicago Ave<br />Chicago, IL 60654</address><a href={PHONE_HREF} className="mt-3 inline-block">{PHONE}</a><br /><a className="about-text-link mt-5" href="https://www.google.com/maps/dir/?api=1&destination=67+W+Chicago+Ave+Chicago+IL" target="_blank" rel="noopener noreferrer">Get directions <ArrowUpRight size={16} aria-hidden="true" /></a></div><iframe title="Shanzo Salon location at 67 W Chicago Ave, Chicago" src="https://maps.google.com/maps?q=67+W+Chicago+Ave+Chicago+IL&output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen className="h-72 w-full rounded-2xl border-0 md:h-80" /></div></section>
       </main>

@@ -41,7 +41,7 @@ export default function Home() {
         <div className="about-wrap home-hero-content relative z-10 text-center">
           <p className="about-label text-white/85">Shanzo Salon · Chicago</p>
           <h1 id="home-title" className="text-center">
-            Revitalize Your Beauty Today
+            Revitalize Your <em>Beauty</em> Today
             <br />
           </h1>
           <p>
@@ -89,7 +89,7 @@ export default function Home() {
           <h2>
             A little time,
             <br />
-            <em>beautifully yours.</em>
+            beautifully <em>yours.</em>
           </h2>
           <div className="about-rule" />
           <p className="about-body">
@@ -112,7 +112,7 @@ export default function Home() {
             <h2>
               Considered care.
               <br />
-              <em>Every detail.</em>
+              Every <em>detail.</em>
             </h2>
           </Reveal>
           <div className="mt-12 grid gap-5 md:grid-cols-3">
@@ -151,7 +151,7 @@ export default function Home() {
               <p>
                 Settle in.
                 <br />
-                <em>Feel at home.</em>
+                Feel at <em>home.</em>
               </p>
             </div>
           </div>

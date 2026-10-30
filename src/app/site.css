@@ -7,9 +7,9 @@ body {
 .site-bright-shade {
   background: linear-gradient(
     90deg,
-    rgba(27, 23, 19, 0.78),
-    rgba(27, 23, 19, 0.52) 36%,
-    rgba(27, 23, 19, 0.06) 70%,
+    rgba(27, 23, 19, 0.84),
+    rgba(27, 23, 19, 0.62) 36%,
+    rgba(27, 23, 19, 0.22) 70%,
     transparent
   ) !important;
 }
@@ -321,13 +321,10 @@ body {
   .site-bright-shade {
     background: linear-gradient(
       90deg,
-      #1b1713c9,
-      #1b17136e 65%,
+      #1b1713d6,
+      #1b171399 65%,
       #1b17131a
     ) !important;
-  }
-  .site-page .about-hero h1 {
-    font-size: clamp(50px, 9vw, 70px);
   }
   .site-page .about-footer .about-wordmark {
     justify-self: start;
@@ -388,11 +385,11 @@ body {
   background: #493e32;
 }
 
-/* Script lettering and a quiet, fixed navigation rail, as in the reference. */
+/* Elegant serif headings with single-word script accents. */
 .about-luxury {
   --sidebar-width: clamp(208px, 18vw, 340px);
   --type-body: 18px;
-  --type-section: 54px;
+  --type-section: 57px;
   font-size: var(--type-body);
   line-height: 1.7;
   color: #555;
@@ -406,33 +403,38 @@ body {
 .about-luxury .about-reason h3,
 .about-luxury .site-details-title,
 .about-luxury .site-highlight-label p {
-  font-family: var(--about-serif), cursive;
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: 1.3;
+  font-family: var(--about-serif), Georgia, serif;
+  font-weight: 600;
+  letter-spacing: normal;
+  line-height: 1.18;
+  overflow-wrap: break-word;
 }
 .about-luxury h1 {
-  font-size: clamp(40px, 4.5vw, 92px);
+  font-size: clamp(43px, 4.86vw, 99px);
   line-height: 1.2;
-  font-weight: 700;
+  font-weight: 600;
 }
 .about-luxury h2 {
   font-size: var(--type-section);
-  font-weight: 700;
+  font-weight: 600;
 }
 .about-luxury h1 em,
 .about-luxury h2 em,
 .about-luxury blockquote em,
 .site-highlight-label em {
+  font-family: var(--about-script), cursive;
   font-style: normal;
-  font-weight: inherit;
+  font-weight: 400;
+  font-size: 1.25em;
+  line-height: 1;
+  color: #B8902F;
 }
 .about-luxury .site-page-heading h1 {
-  font-size: var(--type-section);
-  font-weight: 700;
+  font-size: 58px;
+  font-weight: 600;
 }
 .about-luxury .site-form-title {
-  font-size: 38px;
+  font-size: 40px;
 }
 .about-luxury .team-member-content > h2 {
   font-family: var(--about-sans), sans-serif;
@@ -440,11 +442,17 @@ body {
   line-height: 1.4;
 }
 .about-wordmark {
-  font-family: var(--about-serif), cursive;
+  font-family: var(--about-serif), Georgia, serif;
   font-size: 28px;
   line-height: 1.1;
   letter-spacing: 0;
   color: #554b40;
+}
+.site-logo {
+  display: block;
+  width: 240px;
+  max-width: 100%;
+  height: auto;
 }
 .about-wordmark span {
   font-size: 8px;
@@ -525,7 +533,7 @@ body {
 }
 .about-promise blockquote {
   font-size: clamp(36px, 3.6vw, 48px);
-  font-weight: 700;
+  font-weight: 600;
 }
 .about-luxury .about-footer .about-wordmark {
   font-size: 31px;
@@ -599,17 +607,14 @@ body {
   .about-navigation .about-nav-book {
     margin-top: 14px;
   }
-  .about-luxury .about-hero h1 {
-    font-size: clamp(38px, 8vw, 58px);
-  }
   .about-luxury .about-hero {
     min-height: 560px;
   }
   .about-luxury .site-page-heading h1 {
-    font-size: 40px;
+    font-size: 43px;
   }
   .about-luxury h2 {
-    font-size: 36px;
+    font-size: 38px;
   }
   .about-hero-description {
     max-width: 300px;
@@ -648,11 +653,11 @@ body {
 }
 .about-luxury .about-service-card h3 {
   font-size: 38px;
-  font-weight: 700;
+  font-weight: 600;
 }
 .about-luxury .about-reason h3 {
   font-size: 30px;
-  font-weight: 700;
+  font-weight: 600;
 }
 .about-luxury .about-reason p {
   font-size: 16px;
@@ -685,16 +690,16 @@ body {
   font-size: 12px;
 }
 .about-luxury .site-form-title {
-  font-size: 38px;
-  font-weight: 700;
+  font-size: 40px;
+  font-weight: 600;
 }
 .about-luxury .site-details-title {
   font-size: 32px;
-  font-weight: 700;
+  font-weight: 600;
 }
 .about-luxury .site-highlight-label p {
   font-size: 38px;
-  font-weight: 700;
+  font-weight: 600;
 }
 .about-luxury .team-member-bio p {
   font-size: 17px;
@@ -743,7 +748,7 @@ body {
     padding-inline: 24px;
   }
   .about-luxury h2 {
-    font-size: 42px;
+    font-size: 45px;
   }
 }
 @media (max-width: 767px) {
@@ -761,9 +766,34 @@ body {
   }
   .about-luxury .about-service-card h3,
   .about-luxury .site-form-title {
-    font-size: 32px;
+    font-size: 34px;
   }
   .about-luxury .about-footer {
     font-size: 12px;
+  }
+}
+
+/* Hero contrast and responsive heading limits; body and controls retain their scale. */
+.about-luxury .about-hero h1 {
+  font-size: clamp(44px, 5.4vw, 72px);
+  line-height: 1.18;
+  color: #fff;
+}
+.about-hero h1,
+.about-hero .about-hero-description,
+.home-hero-content > p {
+  text-shadow: 0 2px 18px rgba(0, 0, 0, .45);
+}
+.about-luxury .about-hero h1 em,
+.about-luxury .about-promise blockquote em,
+.about-luxury .site-visit-cta h2 em {
+  color: #E2C275;
+}
+@media (max-width: 767px) {
+  .about-luxury .about-hero h1 {
+    font-size: clamp(44px, 8vw, 58px);
+  }
+  .about-luxury .site-highlight-label p {
+    font-size: clamp(28px, 7vw, 36px);
   }
 }

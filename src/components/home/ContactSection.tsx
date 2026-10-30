@@ -94,7 +94,7 @@ export default function ContactSection({
         <div className="contact-grid">
           <div>
             <h2 className="site-form-title">
-              {application ? "Your application" : "Send a little note."}
+              {application ? <>Your <em>application</em></> : <>Send a little <em>note.</em></>}
             </h2>
             <form
               onSubmit={(event) => {

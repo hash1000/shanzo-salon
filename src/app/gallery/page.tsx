@@ -12,8 +12,8 @@ export default function GalleryPage() {
     <SiteShell>
       <PageHeading
         label="01 / A closer look"
-        title="A space to"
-        accent="settle in."
+        title="A space to settle"
+        accent="in."
       >
         Warm light, thoughtful details, and room to feel comfortable. Take a
         look around Shanzo Salon.

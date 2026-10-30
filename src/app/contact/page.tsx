@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <SiteShell>
-      <PageHeading label="01 / Let’s talk" title="We’re here" accent="for you.">
+      <PageHeading label="01 / Let’s talk" title="We’re here for" accent="you.">
         Questions about a service or your next visit? Send us a note. For
         appointments, you can also book online.
       </PageHeading>

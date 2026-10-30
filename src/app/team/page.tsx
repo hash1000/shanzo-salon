@@ -14,30 +14,50 @@ export const metadata: Metadata = {
   description: `Meet the hair stylists, nail technicians, and esthetician at ${SITE_NAME} in Chicago.`,
 };
 
-const team = [
+type TeamMember = {
+  name: string;
+  initials: string;
+  service: string;
+  image: string | null;
+  bio?: string[];
+};
+
+const team: TeamMember[] = [
+  {
+    name: "Violet Eliza",
+    initials: "VE",
+    service: "Hair Stylist",
+    image: "/violet-eliza.png",
+    bio: [
+      "With six years behind the chair, Violet specializes in custom blonding, bridal hair and updos, special-occasion styling, and men’s precision cuts.",
+      "Her approach is centered on creating effortlessly beautiful, personalized looks tailored to each client—whether that means customized blonde dimension, an elevated style for a special occasion, or a clean, precision cut.",
+      "Based in Chicago’s Gold Coast, Violet brings a thoughtful, individualized approach to every appointment, helping each client leave with a look that feels polished, flattering, and uniquely their own.",
+    ],
+  },
+  {
+    name: "Ruby Smizer",
+    initials: "RS",
+    service: "Nail Technician",
+    image: "/ruby-smizer.png",
+    bio: [
+      "Ruby is a talented Nail Technician at Gold Coast Beauty Salon & Spa who enjoys helping clients look and feel their best through beautiful, well-maintained nails.",
+      "Offering a variety of services, including classic, gel, and Russian manicures, acrylic nail enhancements, and relaxing pedicures, Ruby is dedicated to providing a personalized experience tailored to each client's preferences.",
+      "Whether you're looking for a clean, natural finish, a fresh set of acrylics, or a relaxing spa pedicure, Ruby brings care and attention to detail to every appointment. She understands that nail care is more than just a beauty service—it's an opportunity to unwind, express your personal style, and enjoy a little well-deserved self-care.",
+      "Ruby looks forward to welcoming you to Gold Coast Beauty Salon & Spa and helping you leave feeling refreshed, confident, and beautifully polished.",
+    ],
+  },
   // {
-  //   name: "Molly Sproles-Barbian",
-  //   initials: "MS",
+  //   name: "Genean Michele",
+  //   initials: "GD",
   //   service: "Hair Stylist",
-  //   image: "/molly-sproles-Barbian(Hair Stylist).png",
-  //   bio: [
-  //     "With six years of experience as a licensed hairstylist, I’ve built my career across Las Vegas, Arizona, and now Chicago, with each experience shaping my approach behind the chair.",
-  //     "Haircutting is where I truly shine. I love combining technical precision with creativity to create personalized cuts that complement each client’s features, style, and personality. Whether you’re looking for a fresh new look or the perfect shape to bring your current style back to life, my goal is to create hair that feels uniquely you.",
-  //     "Most importantly, I want every client to leave my chair feeling confident and looking their best. I’m passionate about my craft and continually stay inspired by new techniques, trends, and opportunities to elevate the experience I provide.",
-  //   ],
+  //   image: null,
   // },
-  {
-    name: "Genean Michele",
-    initials: "GD",
-    service: "Hair Stylist",
-    image: null,
-  },
-  {
-    name: "Deanna Walsh",
-    initials: "DW",
-    service: "Hair Stylist",
-    image: null,
-  },
+  // {
+  //   name: "Deanna Walsh",
+  //   initials: "DW",
+  //   service: "Hair Stylist",
+  //   image: null,
+  // },
   {
     name: "Nina Maney",
     initials: "NM",
@@ -90,8 +110,7 @@ export default function TeamPage() {
             {team.map((member) => (
               <li
                 key={member.name}
-                className="team-member"
-                // ${member.bio ? " team-member-featured" : ""}
+                className={`team-member${member.bio ? " team-member-featured" : ""}`}
               >
                 <div className={`team-portrait${!member.image ? " team-portrait-placeholder" : ""}`}>
                   {member.image ? (
@@ -110,17 +129,15 @@ export default function TeamPage() {
                   <span className="team-portrait-mark" aria-hidden="true"><Sparkles size={19} /></span>
                 </div>
                 <div className="team-member-content">
-                  {/* {member.bio && <p className="team-featured-label">In the stylist’s chair</p>} */}
                   <h2>{member.name}</h2>
                   <p className="team-member-service">{member.service}</p>
-                  {/* {member.bio && (
+                  {member.bio && (
                     <div className="team-member-bio">
-                      <h3>Bio</h3>
                       {member.bio.map((paragraph) => (
                         <p key={paragraph}>{paragraph}</p>
                       ))}
                     </div>
-                  )} */}
+                  )}
                   <a href={BOOKING_URL} className="team-book-link" aria-label={`Book an appointment with ${member.name}`}>
                     Book a visit <ArrowUpRight size={16} aria-hidden="true" />
                   </a>

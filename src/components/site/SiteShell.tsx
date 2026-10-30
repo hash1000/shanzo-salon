@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight, Music2 } from "lucide-react";
 import AboutNav from "@/components/about/AboutNav";
 import Reveal from "@/components/about/AboutReveal";
@@ -52,7 +53,14 @@ export function SiteFooter() {
           className="about-wordmark"
           aria-label="Shanzo Salon home"
         >
-          Shanzo Salon<span>CHICAGO</span>
+          <Image
+            src="/images/logo.png"
+            alt="Gold Coast Beauty"
+            width={4500}
+            height={1425}
+            sizes="240px"
+            className="site-logo"
+          />
         </Link>
         <div>
           <address className="not-italic">{ADDRESS}</address>
@@ -112,7 +120,7 @@ export function VisitCTA() {
         <h2>
           Make a little room
           <br />
-          <em>for yourself.</em>
+          for <em>yourself.</em>
         </h2>
         <p className="about-body mt-6">
           Hair, nails, and waxing, with care shaped around you.
@@ -138,7 +146,7 @@ export function HiringSection() {
           <h2>
             Good people.
             <br />
-            <em>Beautiful work.</em>
+            Beautiful <em>work.</em>
           </h2>
           <p className="about-body mt-5">
             We’re hiring. Bring your skills and your care for people to Shanzo

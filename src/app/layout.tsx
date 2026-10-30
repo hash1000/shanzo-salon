@@ -1,15 +1,21 @@
 import type { Metadata } from "next";
-import { Parisienne, Quicksand } from "next/font/google";
+import { Cormorant_Garamond, Quicksand, Sacramento } from "next/font/google";
 import "./globals.css";
 import "./about/about.css";
 import "./site.css";
 import "./decor.css";
 import { SITE_NAME } from "@/lib/site";
 
-const serif = Parisienne({
+const serif = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--about-serif",
+  display: "swap",
+});
+const script = Sacramento({
   subsets: ["latin"],
   weight: "400",
-  variable: "--about-serif",
+  variable: "--about-script",
   display: "swap",
 });
 const sans = Quicksand({
@@ -42,7 +48,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${serif.variable} ${sans.variable}`}>
+    <html lang="en" className={`${serif.variable} ${script.variable} ${sans.variable}`}>
       <body className="font-sans antialiased">{children}</body>
     </html>
   );
