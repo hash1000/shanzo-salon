@@ -57,3 +57,109 @@
 @media(max-width:1100px) { .team-page .team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .team-page .team-member-featured { gap: 0; grid-template-columns: 1fr; border-radius: 150px 150px 18px 18px; } .team-page .team-member-featured .team-portrait { width: min(100%, 440px); justify-self: center; max-height: none; aspect-ratio: 4/5; } .team-page .team-member-featured .team-member-content { padding: 28px; } }
 @media(max-width:639px) { .team-page .site-page-heading::after { right: 5%; top: 45px; font-size: 55px; opacity: .6; } .team-intro-note { font-size: 24px; } .team-intro-details { padding-bottom: 28px; gap: 16px; } .team-specialties { gap: 7px; } .team-specialties span { padding: 8px 10px; font-size: 10px; } .team-page .team-member-featured .team-member-content { padding: 25px 12px; } .team-page .team-grid { grid-template-columns: 1fr; gap: 28px; } }
 @media(prefers-reduced-motion:reduce) { .team-page .team-member { transition: none; } .team-page .team-member:hover { transform: none; } }
+
+/* Balanced specialist stories, followed by an even grid of four portraits. */
+.team-page .team-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+.team-page .team-member {
+  border-color: #e7dccb;
+  box-shadow: 0 10px 30px #59422407;
+  transition: transform .35s var(--salon-ease), box-shadow .35s;
+}
+.team-page .team-member-featured {
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.35fr);
+  gap: clamp(24px, 3vw, 44px);
+  padding: 18px;
+  border-radius: 120px 20px 20px 20px;
+  background: linear-gradient(120deg, #f3ebdd, #fffdf9 75%);
+}
+.team-page .team-member-featured .team-portrait {
+  border-radius: 105px 105px 10px 10px;
+  max-width: 420px;
+  box-shadow: 0 8px 20px #59422410;
+}
+.team-page .team-member-featured .team-member-content {
+  padding: 24px 20px 24px 0;
+}
+.about-luxury .team-page .team-member-content > h2 {
+  font-family: var(--about-serif), Georgia, serif;
+  font-weight: 600;
+  font-size: clamp(28px, 2.6vw, 36px);
+  line-height: 1.2;
+  color: #302b27;
+}
+.about-luxury .team-page .team-member-featured h2 {
+  font-size: clamp(34px, 3.2vw, 44px);
+}
+.team-page .team-member-bio {
+  margin-top: 22px;
+  padding-top: 22px;
+  max-width: 65ch;
+}
+.team-page .team-member-bio p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #655b50;
+}
+.team-page .team-member:not(.team-member-featured) .team-portrait {
+  aspect-ratio: 1 / 1.08;
+}
+.team-page .team-member:not(.team-member-featured) .team-member-content > h2 {
+  min-height: auto;
+  margin-top: 4px;
+}
+.team-page .team-member:not(.team-member-featured) .team-book-link {
+  margin-top: 22px;
+}
+.team-page .team-featured-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10px;
+}
+.team-page .team-featured-label::before {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: #b89a64;
+}
+@media (min-width: 768px) and (max-width: 1100px) {
+  .team-page .team-member-featured {
+    grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+    gap: 20px;
+    border-radius: 80px 18px 18px 18px;
+  }
+  .team-page .team-member-featured .team-portrait { border-radius: 65px 65px 8px 8px; }
+  .team-page .team-member-featured .team-member-content { padding: 12px 8px 12px 0; }
+}
+@media (max-width: 767px) {
+  .team-page .team-member-featured {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 12px;
+    border-radius: 100px 100px 18px 18px;
+  }
+  .team-page .team-member-featured .team-portrait {
+    width: 100%;
+    max-width: 400px;
+    justify-self: center;
+    aspect-ratio: 4 / 4.5;
+    border-radius: 90px 90px 10px 10px;
+  }
+  .team-page .team-member-featured .team-member-content { padding: 28px 12px 16px; }
+  .team-page .team-member-bio p { font-size: 15px; }
+  .team-page .team-grid { gap: 22px; }
+}
+@media (max-width: 639px) {
+  .team-page .team-grid { grid-template-columns: 1fr; }
+  .team-page .team-member:not(.team-member-featured) .team-portrait { aspect-ratio: 4 / 4.5; }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .team-page .team-member:hover { transform: translateY(-3px); box-shadow: 0 16px 38px #59422410; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .team-page .team-member { transition: none; }
+  .team-page .team-member:hover { transform: none; }
+}

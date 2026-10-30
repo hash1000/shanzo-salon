@@ -86,3 +86,115 @@
   .about-luxury .contact-grid { gap: 36px; }
 }
 @media(prefers-reduced-motion:reduce) { .about-luxury .about-button { transition: none; } }
+
+/* Polished finishes shared by the public salon pages. */
+.about-luxury {
+  --salon-ease: cubic-bezier(.22, 1, .36, 1);
+}
+.about-luxury .about-nav {
+  background: linear-gradient(180deg, #fff, #fcfaf6);
+  border-color: #e9dfcf;
+}
+.about-luxury .about-navigation > a:not(.about-nav-book) {
+  position: relative;
+  transition: color .25s, padding-left .3s var(--salon-ease);
+}
+.about-luxury .about-navigation > a[aria-current="page"] {
+  color: #85662d;
+  padding-left: 16px;
+}
+.about-luxury .about-navigation > a[aria-current="page"]::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  border: 1px solid #b8902f;
+  transform: rotate(45deg);
+}
+.about-luxury .about-button,
+.about-luxury .about-nav-book {
+  border-radius: 6px;
+  transition: background .25s, color .25s, box-shadow .3s, transform .3s var(--salon-ease);
+}
+.about-luxury .about-button-dark {
+  background: linear-gradient(120deg, #383027, #51412e);
+  box-shadow: 0 5px 16px #302b2714;
+}
+.about-luxury .site-visit-cta .about-button-dark {
+  background: #f7efe0;
+}
+.about-luxury .about-button svg,
+.about-luxury .team-book-link svg,
+.about-luxury .about-nav-book svg {
+  transition: transform .3s var(--salon-ease);
+}
+.about-luxury .about-service-card,
+.about-luxury .contact-details {
+  box-shadow: 0 12px 36px #59422409;
+}
+.about-luxury .site-page-heading h1 {
+  color: #302b27;
+  text-wrap: balance;
+}
+.about-luxury .site-visit-cta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 0, #574633, #302b27 70%);
+}
+.about-luxury .site-visit-cta::before {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  border: 1px solid #d4b78530;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: -1;
+}
+.about-luxury .about-footer {
+  background: linear-gradient(180deg, #fffdf9, #f8f3ea);
+}
+.about-luxury .home-form input:focus-visible,
+.about-luxury .home-form textarea:focus-visible,
+.about-luxury .home-form select:focus-visible {
+  border-color: #b8902f;
+  outline: 2px solid #b8902f50;
+}
+.about-luxury .gallery-pin .site-gallery-photo,
+.about-luxury .gallery-video-media {
+  border: 1px solid #e3d5bf;
+  box-shadow: 0 8px 26px #5942240a;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .about-luxury .about-button:hover,
+  .about-luxury .about-nav-book:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px #59422416;
+  }
+  .about-luxury .about-button:hover svg,
+  .about-luxury .team-book-link:hover svg,
+  .about-luxury .about-nav-book:hover svg {
+    transform: translate(2px, -2px);
+  }
+  .about-luxury .about-service-card:hover {
+    box-shadow: 0 16px 32px #59422412;
+  }
+}
+@media (max-width: 767px) {
+  .about-luxury .site-page-heading h1 { max-width: 100%; }
+  .about-luxury .site-visit-cta::before { inset: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-luxury *, .about-luxury *::before, .about-luxury *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .about-luxury .team-member:hover,
+  .about-luxury .about-button:hover,
+  .about-luxury .about-service-card:hover,
+  .about-luxury .site-gallery-photo:hover img {
+    transform: none;
+  }
+}

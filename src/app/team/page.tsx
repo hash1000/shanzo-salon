@@ -116,10 +116,9 @@ export default function TeamPage() {
                   {member.image ? (
                     <Image
                       src={member.image}
-                      // loading={member.bio ? "eager" : "lazy"}
                       alt={`${member.name}, ${member.service}`}
                       fill
-                      sizes="(max-width: 639px) 84vw, (max-width: 900px) 35vw, 23vw"
+                      sizes={member.bio ? "(max-width: 767px) 85vw, (max-width: 1100px) 38vw, 28vw" : "(max-width: 639px) 85vw, 35vw"}
                     />
                   ) : (
                     <span className="team-avatar" aria-hidden="true">
@@ -129,6 +128,7 @@ export default function TeamPage() {
                   <span className="team-portrait-mark" aria-hidden="true"><Sparkles size={19} /></span>
                 </div>
                 <div className="team-member-content">
+                  {member.bio && <p className="team-featured-label">Meet your specialist</p>}
                   <h2>{member.name}</h2>
                   <p className="team-member-service">{member.service}</p>
                   {member.bio && (

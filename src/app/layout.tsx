@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import SiteMotion from "@/components/site/SiteMotion";
 import { Cormorant_Garamond, Quicksand, Sacramento } from "next/font/google";
 import "./globals.css";
 import "./about/about.css";
@@ -49,7 +50,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${serif.variable} ${script.variable} ${sans.variable}`}>
-      <body className="font-sans antialiased">{children}</body>
+      <body className="font-sans antialiased">{children}<SiteMotion /></body>
     </html>
   );
 }
