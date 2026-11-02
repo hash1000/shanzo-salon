@@ -14,7 +14,9 @@ const nextConfig: NextConfig = {
   },
   turbopack: {
     rules: {
-      "*.css": {
+      // Only the Tailwind entry needs this loader. Applying it to generated
+      // next/font CSS rewrites font URL queries that Turbopack must resolve.
+      "globals.css": {
         loaders: ["@tailwindcss/turbopack"],
         as: "*.css",
       },
