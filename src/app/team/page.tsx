@@ -58,18 +58,18 @@ const team: TeamMember[] = [
   //   service: "Hair Stylist",
   //   image: null,
   // },
-  {
-    name: "Nina Maney",
-    initials: "NM",
-    service: "Hair Stylist",
-    image: "/nina-maney(Hair Stylist).png",
-  },
-  {
-    name: "Dana Rivera",
-    initials: "DR",
-    service: "Nail Technician",
-    image: "/dana-rivera(Nail Technician) 2026.png",
-  },
+  // {
+  //   name: "Nina Maney",
+  //   initials: "NM",
+  //   service: "Hair Stylist",
+  //   image: "/nina-maney(Hair Stylist).png",
+  // },
+  // {
+  //   name: "Dana Rivera",
+  //   initials: "DR",
+  //   service: "Nail Technician",
+  //   image: "/dana-rivera(Nail Technician) 2026.png",
+  // },
   {
     name: "Marija Aleksic",
     initials: "MA",
