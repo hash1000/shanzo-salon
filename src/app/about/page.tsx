@@ -43,7 +43,7 @@ const team = [
   { name: "Melanie Ruiz", initials: "MR", service: "Esthetician", image: "/melanie-ruiz(Esthetician).png" },
 ];
 
-export default function AboutPage() {
+export default function AboutPage() { 
   return (
     <div className="about-luxury">
       <a className="about-skip" href="#main-content">Skip to content</a>
