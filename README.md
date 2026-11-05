@@ -109,3 +109,21 @@ API responses: `200 { success: true, id }` means Resend accepted the email;
 `502` email provider failure. All failures return `{ error: string }`.
 
 Reference: [Resend Next.js integration](https://resend.com/docs/send-with-nextjs).
+
+## Production builds (DigitalOcean)
+
+The three salon font families are bundled in `src/app/fonts`, with their OFL
+licenses, and loaded through `next/font/local`. Include this directory in the
+deployment; no Google Fonts downloads are needed during builds.
+
+From the app directory in a fresh release checkout:
+
+```sh
+npm ci
+npm run build
+npm start
+```
+
+For an existing release, stop its app process before clearing the generated
+`.next` directory and rebuilding. Then restart the app with your existing
+process manager. Preserve environment files and persistent hours data.

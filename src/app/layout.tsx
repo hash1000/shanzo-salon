@@ -1,26 +1,27 @@
 import type { Metadata } from "next";
 import SiteMotion from "@/components/site/SiteMotion";
-import { Cormorant_Garamond, Quicksand, Sacramento } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import "./about/about.css";
 import "./site.css";
 import "./decor.css";
 import { SITE_NAME } from "@/lib/site";
 
-const serif = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
+const serif = localFont({
+  src: "./fonts/cormorant-garamond.ttf",
+  weight: "500 700",
   variable: "--about-serif",
   display: "swap",
 });
-const script = Sacramento({
-  subsets: ["latin"],
+const script = localFont({
+  src: "./fonts/sacramento.ttf",
   weight: "400",
   variable: "--about-script",
   display: "swap",
 });
-const sans = Quicksand({
-  subsets: ["latin"],
+const sans = localFont({
+  src: "./fonts/quicksand.ttf",
+  weight: "300 700",
   variable: "--about-sans",
   display: "swap",
 });
