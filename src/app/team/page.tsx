@@ -23,17 +23,17 @@ type TeamMember = {
 };
 
 const team: TeamMember[] = [
-  {
-    name: "Violet Eliza",
-    initials: "VE",
-    service: "Hair Stylist",
-    image: "/violet-eliza.png",
-    bio: [
-      "With six years behind the chair, Violet specializes in custom blonding, bridal hair and updos, special-occasion styling, and men’s precision cuts.",
-      "Her approach is centered on creating effortlessly beautiful, personalized looks tailored to each client—whether that means customized blonde dimension, an elevated style for a special occasion, or a clean, precision cut.",
-      "Based in Chicago’s Gold Coast, Violet brings a thoughtful, individualized approach to every appointment, helping each client leave with a look that feels polished, flattering, and uniquely their own.",
-    ],
-  },
+  // {
+  //   name: "Violet Eliza",
+  //   initials: "VE",
+  //   service: "Hair Stylist",
+  //   image: "/violet-eliza.png",
+  //   bio: [
+  //     "With six years behind the chair, Violet specializes in custom blonding, bridal hair and updos, special-occasion styling, and men’s precision cuts.",
+  //     "Her approach is centered on creating effortlessly beautiful, personalized looks tailored to each client—whether that means customized blonde dimension, an elevated style for a special occasion, or a clean, precision cut.",
+  //     "Based in Chicago’s Gold Coast, Violet brings a thoughtful, individualized approach to every appointment, helping each client leave with a look that feels polished, flattering, and uniquely their own.",
+  //   ],
+  // },
   {
     name: "Ruby Smizer",
     initials: "RS",

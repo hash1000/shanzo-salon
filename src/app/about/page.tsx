@@ -35,7 +35,7 @@ const team = [
   { name: "Molly Sproles-Barbian", initials: "MS", service: "Hair Stylist", image: "/molly-sproles-Barbian(Hair Stylist).png" },
   // { name: "Genean Michele", initials: "GD", service: "Hair Stylist", image: null },
   // { name: "Deanna Walsh", initials: "DW", service: "Hair Stylist", image: null },
-  { name: "Violet Eliza", initials: "VE", service: "Hair Stylist", image: "/violet-eliza.png" },
+  // { name: "Violet Eliza", initials: "VE", service: "Hair Stylist", image: "/violet-eliza.png" },
   { name: "Ruby Smizer", initials: "RS", service: "Hair Stylist", image: "/ruby-smizer.png" },
   // { name: "Nina Maney", initials: "NM", service: "Hair Stylist", image: "/nina-maney(Hair Stylist).png" },
   // { name: "Dana Rivera", initials: "DR", service: "Nail Technician", image: "/dana-rivera(Nail Technician) 2026.png" },
