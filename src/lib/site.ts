@@ -3,7 +3,8 @@ export const ADDRESS = "67 W Chicago Ave, Chicago, IL 60654";
 export const PHONE = "info@shanzosalon.com";
 export const PHONE_HREF = "tel:+13127540191";
 export const BOOKING_URL =
-  "https://booking.cojilio.com/4239/online";
+  "https://booking.cojilio.com/4239/online/Menu/Services";
+export const BOOKING_BASE_URL = "https://booking.cojilio.com/4239";
 // Add verified salon profiles here; empty values are never rendered as links.
 export const SOCIALS = {
   instagram: "https://www.instagram.com/goldcoast.beauty",

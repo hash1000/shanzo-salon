@@ -163,3 +163,21 @@
   .team-page .team-member { transition: none; }
   .team-page .team-member:hover { transform: none; }
 }
+
+/* Let each card's actions span the available content width. */
+.team-page .team-actions {
+  display: flex;
+  width: 100%;
+  gap: 12px;
+}
+.team-page .team-actions .member-button {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 60px;
+  padding: 16px 24px;
+  text-align: center;
+}
+@media (max-width: 639px) {
+  .team-page .team-actions { flex-direction: column; }
+  .team-page .team-actions .member-button { flex-basis: auto; width: 100%; }
+}

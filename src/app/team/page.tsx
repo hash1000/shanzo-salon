@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { team } from "@/data/team";
+import { getPortfolioItems } from "@/lib/portfolio";
 import Image from "next/image";
 import { ArrowUpRight, Scissors, Sparkles, Flower2 } from "lucide-react";
 import SiteShell, {
@@ -6,7 +9,7 @@ import SiteShell, {
   HiringSection,
 } from "@/components/site/SiteShell";
 import Reveal from "@/components/about/AboutReveal";
-import { BOOKING_URL, SITE_NAME } from "@/lib/site";
+import { SITE_NAME } from "@/lib/site";
 import "./team.css";
 
 export const metadata: Metadata = {
@@ -14,77 +17,8 @@ export const metadata: Metadata = {
   description: `Meet the hair stylists, nail technicians, and esthetician at ${SITE_NAME} in Chicago.`,
 };
 
-type TeamMember = {
-  name: string;
-  initials: string;
-  service: string;
-  image: string | null;
-  bio?: string[];
-};
-
-const team: TeamMember[] = [
-  {
-    name: "Violet Eliza",
-    initials: "VE",
-    service: "Hair Stylist",
-    image: "/violet-eliza.png",
-    bio: [
-      "With six years behind the chair, Violet specializes in custom blonding, bridal hair and updos, special-occasion styling, and men’s precision cuts.",
-      "Her approach is centered on creating effortlessly beautiful, personalized looks tailored to each client—whether that means customized blonde dimension, an elevated style for a special occasion, or a clean, precision cut.",
-      "Based in Chicago’s Gold Coast, Violet brings a thoughtful, individualized approach to every appointment, helping each client leave with a look that feels polished, flattering, and uniquely their own.",
-    ],
-  },
-  {
-    name: "Ruby Smizer",
-    initials: "RS",
-    service: "Nail Technician",
-    image: "/ruby-smizer.png",
-    bio: [
-      "Ruby is a talented Nail Technician at Gold Coast Beauty Salon & Spa who enjoys helping clients look and feel their best through beautiful, well-maintained nails.",
-      "Offering a variety of services, including classic, gel, and Russian manicures, acrylic nail enhancements, and relaxing pedicures, Ruby is dedicated to providing a personalized experience tailored to each client's preferences.",
-      "Whether you're looking for a clean, natural finish, a fresh set of acrylics, or a relaxing spa pedicure, Ruby brings care and attention to detail to every appointment. She understands that nail care is more than just a beauty service—it's an opportunity to unwind, express your personal style, and enjoy a little well-deserved self-care.",
-      "Ruby looks forward to welcoming you to Gold Coast Beauty Salon & Spa and helping you leave feeling refreshed, confident, and beautifully polished.",
-    ],
-  },
-  // {
-  //   name: "Genean Michele",
-  //   initials: "GD",
-  //   service: "Hair Stylist",
-  //   image: null,
-  // },
-  // {
-  //   name: "Deanna Walsh",
-  //   initials: "DW",
-  //   service: "Hair Stylist",
-  //   image: null,
-  // },
-  // {
-  //   name: "Nina Maney",
-  //   initials: "NM",
-  //   service: "Hair Stylist",
-  //   image: "/nina-maney(Hair Stylist).png",
-  // },
-  // {
-  //   name: "Dana Rivera",
-  //   initials: "DR",
-  //   service: "Nail Technician",
-  //   image: "/dana-rivera(Nail Technician) 2026.png",
-  // },
-  {
-    name: "Marija Aleksic",
-    initials: "MA",
-    service: "Nail Technician",
-    image: "/marija-aleksic (Nail Technician).png",
-  },
-  {
-    name: "Melanie Ruiz",
-    initials: "MR",
-    service: "Esthetician",
-    image: "/melanie-ruiz(Esthetician).png",
-  },
-];
-
-export default function TeamPage() {
+export default async function TeamPage() {
+  const portfolios = new Map(await Promise.all(team.map(async member => [member.slug, await getPortfolioItems(member)] as const)));
   return (
     <SiteShell>
       <div className="team-page">
@@ -138,9 +72,11 @@ export default function TeamPage() {
                       ))}
                     </div>
                   )}
-                  <a href={BOOKING_URL} className="team-book-link" aria-label={`Book an appointment with ${member.name}`}>
+                  <div className="team-actions"><a href={member.bookingUrl} target="_blank" rel="noopener noreferrer" className="member-button" aria-label={`Book an appointment with ${member.name}`}>
                     Book a visit <ArrowUpRight size={16} aria-hidden="true" />
                   </a>
+                  {!!portfolios.get(member.slug)?.length && <Link className="member-button member-button-outline" href={`/team/${member.slug}`}>View Portfolio</Link>}
+                  </div>
                 </div>
               </li>
             ))}

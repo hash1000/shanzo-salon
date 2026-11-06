@@ -11,7 +11,7 @@ export type WalkInConfig = {
   overrides?: Array<{ date: string } & Partial<Record<Service, DayHours>>>;
 };
 
-export const WALK_IN_BOOKING_URL = "https://booking.cojilio.com/4239/online";
+export const WALK_IN_BOOKING_URL = "https://booking.cojilio.com/4239/online/Menu/Services";
 // TODO: Owner to confirm/replace this placeholder phone before publishing.
 export const WALK_IN_PHONE = "+13125550100";
 

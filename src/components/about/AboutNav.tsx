@@ -59,13 +59,13 @@ export default function AboutNav() {
             <Link
               key={link.href}
               href={link.href}
-              aria-current={link.href === pathname ? "page" : undefined}
+              aria-current={(link.href === pathname || (link.href !== "/" && pathname.startsWith(`${link.href}/`))) ? "page" : undefined}
               onClick={() => setOpen(false)}
             >
               {link.label}
             </Link>
           ))}
-          <a href={BOOKING_URL} className="about-nav-book">
+          <a target="_blank" rel="noopener noreferrer" href={BOOKING_URL} className="about-nav-book">
             Book a visit <ArrowUpRight size={14} aria-hidden="true" />
           </a>
         </nav>

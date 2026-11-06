@@ -198,3 +198,31 @@
     transform: none;
   }
 }
+
+/* Prominent booking actions across the shared navigation and member pages. */
+.about-luxury .about-navigation .about-nav-book,
+.about-luxury .member-button {
+  display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+  min-height: 56px; padding: 14px 20px; border: 1px solid #b8860b;
+  border-radius: 8px; background: #b8860b; color: #fff; font-size: 16px;
+  font-weight: 500; line-height: 1.4; text-decoration: none;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.about-luxury .about-navigation .about-nav-book { width: 100%; min-height: 58px; justify-content: space-between; }
+.about-luxury .member-button-outline { background: transparent; color: #986e08; }
+.about-luxury .member-button:hover,
+.about-luxury .about-navigation .about-nav-book:hover { transform: translateY(-2px); box-shadow: 0 8px 20px #926a222b; }
+.about-luxury .member-button:focus-visible,
+.about-luxury .about-navigation .about-nav-book:focus-visible { outline: 2px solid #805c05; outline-offset: 4px; }
+.team-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.about-small-note { max-width: 48ch; line-height: 1.8; }
+.footer-services { display: grid; gap: 10px; }
+.about-luxury .footer-services h2 { font-family: var(--about-sans),sans-serif; font-size: 14px; font-weight: 600; }
+.portfolio-profile { padding-block: 64px; }
+.portfolio-profile-grid { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.3fr); gap: 48px; align-items: center; margin-top: 32px; }
+.portfolio-portrait { position: relative; aspect-ratio: 4/5; overflow: hidden; border-radius: 130px 130px 16px 16px; background: #eee9e0; }
+.portfolio-work-title { margin-bottom: 32px; }
+.portfolio-cta { padding-block: 56px 88px; text-align: center; }
+.portfolio-cta .member-button { margin-top: 28px; }
+@media(max-width:767px) { .portfolio-profile-grid { grid-template-columns: 1fr; gap: 28px; } .portfolio-portrait { width: min(100%,400px); margin-inline: auto; } }
+@media(prefers-reduced-motion:reduce) { .about-luxury .member-button,.about-luxury .about-navigation .about-nav-book { transition: none; transform: none; } }

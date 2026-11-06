@@ -17,7 +17,7 @@ export default function Hero() {
           Revitalize Your Beauty Today
         </h1>
         <p>Experience luxurious beauty treatments at our salon</p>
-        <a className="gold-button" href={BOOKING_URL}>
+        <a className="gold-button" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
           Book Your Appointment
         </a>
         <a className="hero-phone" href={PHONE_HREF}>

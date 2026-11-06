@@ -1,3 +1,4 @@
+import ServiceCards from "@/components/site/ServiceCards";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, ArrowDown } from "lucide-react";
@@ -8,23 +9,6 @@ import SiteShell, {
 import Reveal from "@/components/about/AboutReveal";
 import { BOOKING_URL } from "@/lib/site";
 
-const services = [
-  {
-    name: "Hair",
-    text: "A thoughtful cut, a fresh shape, a style that feels like you. Hair care for every member of the family.",
-    detail: "Shape. Movement. You.",
-  },
-  {
-    name: "Nails",
-    text: "Careful shaping, considered colour, and a polished finish. Personal nail care with attention to the smallest details.",
-    detail: "Care in every detail.",
-  },
-  {
-    name: "Waxing",
-    text: "Attentive waxing in a calm, private space. We take time to explain the process and put your comfort first.",
-    detail: "A softer kind of care.",
-  },
-];
 export default function Home() {
   return (
     <SiteShell>
@@ -49,7 +33,7 @@ export default function Home() {
             every visit.
           </p>
           <a
-            href={BOOKING_URL}
+            href={BOOKING_URL} target="_blank" rel="noopener noreferrer"
             className="about-button about-button-light mt-9"
           >
             Book an Appointment <ArrowUpRight size={18} aria-hidden="true" />
@@ -107,33 +91,16 @@ export default function Home() {
       </section>
       <section className="about-services about-space">
         <div className="about-wrap">
-          <Reveal>
-            <p className="about-label">02 / What we do</p>
+          <Reveal className="mb-12 flex flex-wrap items-end justify-between gap-6">
+            <div><p className="about-label">02 / What we do</p>
             <h2>
               Considered care.
               <br />
               Every <em>detail.</em>
-            </h2>
+            </h2></div>
+            <span className="about-small-note">HAIR · NAILS · WAXING · BROWS & LASHES · MAKEUP · BODY · FACIALS</span>
           </Reveal>
-          <div className="mt-12 grid gap-5 md:grid-cols-3">
-            {services.map((s, i) => (
-              <Reveal key={s.name} className="h-full">
-                <article className="about-service-card h-full">
-                  <span className="about-card-number">0{i + 1}</span>
-                  <h3>{s.name}</h3>
-                  <p className="about-body">{s.text}</p>
-                  <a
-                    href={BOOKING_URL}
-                    className="about-card-bottom"
-                    aria-label={`Book ${s.name.toLowerCase()} services`}
-                  >
-                    <span>{s.detail}</span>
-                    <ArrowUpRight size={20} aria-hidden="true" />
-                  </a>
-                </article>
-              </Reveal>
-            ))}
-          </div>
+          <ServiceCards />
         </div>
       </section>
       <section className="about-wrap about-space">

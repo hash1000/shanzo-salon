@@ -1,3 +1,4 @@
+import { services } from "@/data/services";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, Music2 } from "lucide-react";
@@ -68,6 +69,7 @@ export function SiteFooter() {
           <p className="mt-4">© 2026 Shanzo Salon. All rights reserved.</p>
         </div>
         <div className="grid content-start gap-4">
+          <nav aria-label="Services" className="footer-services"><h2>Services</h2>{services.map(category => <a key={category.title} href={category.url} target="_blank" rel="noopener noreferrer">{category.title}</a>)}</nav>
           <SocialLinks />
           <Link href="/hours" prefetch={false}>Walk-in hours</Link>
           <Link href="/apply">
@@ -126,7 +128,7 @@ export function VisitCTA() {
           Hair, nails, and waxing, with care shaped around you.
         </p>
         <div className="mt-9 flex flex-wrap justify-center gap-4">
-          <a href={BOOKING_URL} className="about-button about-button-dark">
+          <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="about-button about-button-dark">
             Book an Appointment <ArrowUpRight size={17} aria-hidden="true" />
           </a>
           <Link href="/contact" className="about-button about-button-outline">

@@ -32,6 +32,11 @@ const photos = [
     alt: "A neatly prepared treatment bed in the private waxing room",
   },
   {
+    src: "/images/brows-n-lashes.webp",
+    width: 740, height: 740,
+    alt: "A neatly prepared brows-n-lashes treatment station with a magnifying lamp",
+  },
+  {
     src: "/images/wash-stations.webp",
     width: 740, height: 740,
     alt: "Comfortable chairs at the hair washing stations",
@@ -88,7 +93,7 @@ export default function Gallery() {
               return (
                 <figure className="gallery-pin" key={pin.src}>
                   <div className="gallery-video-media">
-                    <video width={pin.width} height={pin.height} autoPlay muted loop playsInline preload="metadata" poster={pin.poster} aria-label={pin.caption}>
+                    <video width={pin.width} height={pin.height} autoPlay muted loop controls playsInline preload="metadata" poster={pin.poster} aria-label={pin.caption}>
                       <source src={pin.src} type="video/mp4" />
                       Your browser does not support video. <a href={pin.src}>Download the video</a>.
                     </video>
