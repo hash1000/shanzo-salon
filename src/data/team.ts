@@ -1,4 +1,4 @@
-import { BOOKING_URL } from "@/lib/site";
+import { BOOKING_BASE_URL } from "@/lib/site";
 
 export type TeamMember = {
   slug: string;
@@ -15,7 +15,7 @@ export const team: TeamMember[] = [
   // {
   //   name: "Violet Eliza",
   //   slug: "violet-eliza",
-  //   bookingUrl: BOOKING_URL,
+  //   bookingUrl: BOOKING_BASE_URL,
   //   galleryFolder: "violet-gallery",
   //   initials: "VE",
   //   service: "Hair Stylist",
@@ -29,7 +29,7 @@ export const team: TeamMember[] = [
   {
     name: "Ruby Smizer",
     slug: "ruby-smizer",
-    bookingUrl: `${BOOKING_URL}/provider/rubys`,
+    bookingUrl: `${BOOKING_BASE_URL}/provider/rubys`,
     galleryFolder: "ruby-gallery",
     initials: "RS",
     service: "Nail Technician",
@@ -44,7 +44,7 @@ export const team: TeamMember[] = [
   {
     name: "Genean Michele",
     slug: "genean-michele",
-    bookingUrl: `${BOOKING_URL}/provider/geneanm`,
+    bookingUrl: `${BOOKING_BASE_URL}/provider/geneanm`,
     galleryFolder: "genean-gallery",
     initials: "GM",
     service: "Hair Stylist",
@@ -57,7 +57,7 @@ export const team: TeamMember[] = [
   {
     name: "Marija Aleksic",
     slug: "marija-aleksic",
-    bookingUrl: `${BOOKING_URL}/provider/marijaa`,
+    bookingUrl: `${BOOKING_BASE_URL}/provider/marijaa`,
     galleryFolder: "marija-gallery",
     initials: "MA",
     service: "Nail Technician",
@@ -66,7 +66,7 @@ export const team: TeamMember[] = [
   {
     name: "Melanie Ruiz",
     slug: "melanie-ruiz",
-    bookingUrl: `${BOOKING_URL}/provider/melanier`,
+    bookingUrl: `${BOOKING_BASE_URL}/provider/melanier`,
     galleryFolder: "melanie-gallery",
     initials: "MR",
     service: "Esthetician",
@@ -75,4 +75,4 @@ export const team: TeamMember[] = [
 ];
 
 // Ready for a card once the remaining profile details are supplied.
-export const pendingTeam = [{ name: "Deanna W", bookingUrl: `${BOOKING_URL}/provider/deannaw` }];
+export const pendingTeam = [{ name: "Deanna W", bookingUrl: `${BOOKING_BASE_URL}/provider/deannaw` }];
