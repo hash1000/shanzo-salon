@@ -36,7 +36,7 @@ export default function PortfolioGallery({ items, name }: { items: PortfolioItem
             <button type="button" className="site-gallery-photo" aria-label={`View ${item.caption}`} onClick={event => {
               trigger.current = event.currentTarget; setActive(photos.findIndex(photo => photo.src === item.src)); dialog.current?.showModal(); dialog.current?.dispatchEvent(new Event('portfolio-open'));
             }}><Image src={item.src} alt={`${item.caption} by ${name}`} fill sizes="(max-width:639px) 90vw,(max-width:1023px) 40vw,27vw" className="object-cover" /><span><Expand size={18} aria-hidden="true" /></span></button>}
-          <figcaption><span className="gallery-pin-kind">{item.category}</span><h2>{item.caption}</h2></figcaption>
+          <figcaption><span className="gallery-pin-kind">{item.category}</span><h2>{item.caption}</h2>{item.description && <p className="portfolio-card-description line-clamp-2">{item.description}</p>}</figcaption>
         </figure>)}
       </div>
     </div>

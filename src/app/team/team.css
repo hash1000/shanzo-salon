@@ -181,3 +181,12 @@
   .team-page .team-actions { flex-direction: column; }
   .team-page .team-actions .member-button { flex-basis: auto; width: 100%; }
 }
+
+/* Optional portfolio copy uses the gallery's existing muted caption style. */
+.gallery-pin figcaption .portfolio-card-description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  font-weight: 400;
+}

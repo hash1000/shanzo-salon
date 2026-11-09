@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import { contactSchema } from "@/lib/form-schemas";
+import { contactPageSchema } from "@/lib/contact-page-schema";
 import {
   attachmentError,
   MAX_ATTACHMENT_BYTES,
@@ -53,6 +54,8 @@ export async function POST(request: Request) {
         email: form.get("email"),
         message: form.get("message"),
         service: form.get("service") ?? undefined,
+        phone: form.get("phone") ?? undefined,
+        website: form.get("website") ?? undefined,
         inquiryType: form.get("inquiryType") ?? undefined,
       };
       const entries = form.getAll("attachments");
@@ -73,7 +76,14 @@ export async function POST(request: Request) {
     );
   }
 
-  const parsed = contactSchema.safeParse(body);
+  const application =
+    typeof body === "object" &&
+    body !== null &&
+    "inquiryType" in body &&
+    body.inquiryType === "application";
+  const parsed = (application ? contactSchema : contactPageSchema).safeParse(
+    body,
+  );
   if (!parsed.success) {
     return Response.json(
       { error: "Please check your form fields." },
@@ -84,8 +94,12 @@ export async function POST(request: Request) {
   if (invalidAttachment) {
     return Response.json({ error: invalidAttachment }, { status: 400 });
   }
+  if ("website" in parsed.data && parsed.data.website)
+    return Response.json({ success: true });
   const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_TO_EMAIL || FROM_EMAIL;
+  const to = application
+    ? process.env.CONTACT_TO_EMAIL || FROM_EMAIL
+    : process.env.APPLICATION_TO_EMAIL || FROM_EMAIL;
   if (!apiKey) {
     return Response.json(
       { error: "Email delivery is not configured. Please call the salon." },
@@ -94,6 +108,19 @@ export async function POST(request: Request) {
   }
 
   const { name, email, message, service, inquiryType } = parsed.data;
+  const phone = "phone" in parsed.data ? parsed.data.phone : undefined;
+  const escape = (value: string) =>
+    value.replace(
+      /[&<>"']/g,
+      (character) =>
+        ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        })[character]!,
+    );
   try {
     const attachments = await Promise.all(
       files.map(async (file) => ({
@@ -104,11 +131,18 @@ export async function POST(request: Request) {
     );
     const resend = new Resend(apiKey);
     const { data, error } = await resend.emails.send({
-      from: FROM_EMAIL,
+      from: application
+        ? FROM_EMAIL
+        : process.env.APPLICATION_FROM_EMAIL || FROM_EMAIL,
       to,
       replyTo: email,
       subject: `${SITE_NAME}: ${inquiryType === "application" ? "Job application" : "Contact inquiry"}`,
-      text: `Name: ${name}\nEmail: ${email}\nService: ${service || "Not specified"}\n\n${message}`,
+      text: application
+        ? `Name: ${name}\nEmail: ${email}\nService: ${service || "Not specified"}\n\n${message}`
+        : `Name: ${name}\nEmail: ${email}\nPhone: ${phone || "Not provided"}\nService: ${service || "Not specified"}\n\n${message}`,
+      html: application
+        ? undefined
+        : `<h1>${inquiryType === "application" ? "Job application" : "Contact inquiry"}</h1><p>Name: ${escape(name)}</p><p>Email: ${escape(email)}</p><p>Phone: ${escape(String(phone || "Not provided"))}</p><p>Service: ${escape(service || "Not specified")}</p><p style="white-space:pre-wrap">${escape(message)}</p>`,
       attachments,
     });
     if (error || !data) {
