@@ -182,11 +182,15 @@
   .team-page .team-actions .member-button { flex-basis: auto; width: 100%; }
 }
 
-/* Optional portfolio copy uses the gallery's existing muted caption style. */
+/* Readable portfolio descriptions beneath the gold-bordered category label. */
 .gallery-pin figcaption .portfolio-card-description {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
   font-weight: 400;
+  font-size: 15px;
+  line-height: 1.65;
+  color: #655c52;
+  margin-top: 8px;
 }
