@@ -24,5 +24,6 @@ export const portfolioDescriptions: Record<string, Record<string, string>> = {
     "Marija 12": 'Valentine\'s red nails with "XOXO", "Kiss", and "Love" accents.',
     "Marija 13": "Blue-teal chrome swirl line art on nude almond nails.",
     "Marija 14": "Pink gradient nails with white sparkle stars and tiny rhinestones.",
+    "Marija 15": "Soft pink nails with a delicate iridescent shimmer.",
   },
 };
