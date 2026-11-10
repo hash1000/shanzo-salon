@@ -6,12 +6,16 @@ import SiteShell, {
 } from "@/components/site/SiteShell";
 import ContactPageSection from "@/components/sections/ContactPageSection";
 import "./contact.css";
+import { getSalonHours } from "@/lib/salon-hours-store";
+import SalonHoursList from "@/components/hours/SalonHoursList";
+export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Contact | Shanzo Salon",
   description:
-    `Visit Shanzo Salon at 67 W Chicago Ave, Chicago. Email info@shanzosalon.com or call ${PHONE}. Open Monday to Saturday 10 AM to 7 PM, Sunday 1 PM to 7 PM.`,
+    `Visit Shanzo Salon at 67 W Chicago Ave, Chicago. Email info@shanzosalon.com or call ${PHONE}. See our current salon opening hours and plan your visit.`,
 };
-export default function ContactPage() {
+export default async function ContactPage() {
+  const hours = await getSalonHours();
   return (
     <SiteShell>
       <div className="contact-page">
@@ -24,7 +28,9 @@ export default function ContactPage() {
           Send us a note and we will reply by email. Ready to book? You can
           reserve online any time.
         </PageHeading>
-        <ContactPageSection />
+        <ContactPageSection
+          hours={<SalonHoursList data={hours} now={new Date().toISOString()} />}
+        />
         <section className="about-wrap pb-20">
           <p className="about-label">02 / Come on in</p>
           <iframe

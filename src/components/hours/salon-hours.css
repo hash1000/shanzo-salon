@@ -1,0 +1,54 @@
+.salon-hours-list .contact-hours-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 36px 0 16px;
+}
+.salon-hours-list h3 {
+  font-size: 17px;
+  font-weight: 600;
+}
+.salon-hours-list .contact-open-badge {
+  border: 1px solid #b0862c;
+  background: #ede2c9;
+  color: #574115;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+.salon-hours-list table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.salon-hours-list th,
+.salon-hours-list td {
+  padding: 12px 8px;
+  border-bottom: 1px solid #ded4c3;
+}
+.salon-hours-list th {
+  text-align: left;
+  font-weight: 400;
+}
+.salon-hours-list td {
+  text-align: right;
+  white-space: normal;
+}
+.salon-hours-list .contact-today {
+  background: #e9dec6;
+}
+.salon-hours-list .contact-today th,
+.salon-hours-list .contact-today td {
+  font-weight: 600;
+}
+.salon-hours-list .salon-hours-note {
+  margin-top: 16px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.contact-page .salon-hours-list td {
+  white-space: normal;
+}

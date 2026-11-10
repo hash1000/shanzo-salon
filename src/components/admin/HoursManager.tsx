@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState, useTransition } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -73,6 +74,7 @@ export default function HoursManager({ initial, now }: { initial: WalkInConfig; 
   return (
     <>
       <header className="admin-heading">
+        <nav className="admin-tabs mb-5" aria-label="Hours managers"><Link className="admin-tab" data-active="" aria-current="page" href="/admin">Walk-in hours</Link><Link className="admin-tab" href="/admin/salon-hours">Salon hours</Link></nav>
         <div><p className="about-label">Shanzo Salon · Owner access</p><h1>Walk-in Hours Manager</h1></div>
         <div className="flex flex-wrap gap-3 items-center mt-5">
           <a href="/hours" target="_blank" rel="noopener noreferrer" className="about-button about-button-outline">View live page <ExternalLink size={16} aria-hidden="true" /></a>

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -10,19 +10,19 @@ import {
   PHONE,
   PHONE_HREF,
   CANCELLATION_POLICY,
-  HOURS,
 } from "@/lib/site";
 export default function ContactSection({
   variant = "home",
   application = false,
+  hours,
 }: {
   variant?: "home" | "page";
   application?: boolean;
+  hours: ReactNode;
 }) {
   const [attachments, setAttachments] = useState<File[]>([]);
   const [fileError, setFileError] = useState("");
   const fileInput = useRef<HTMLInputElement>(null);
-  const [today, setToday] = useState("");
   const [status, setStatus] = useState({ text: "", error: false });
   const {
     register,
@@ -32,18 +32,6 @@ export default function ContactSection({
   } = useForm<z.infer<typeof contactSchema>>({
     resolver: zodResolver(contactSchema),
   });
-  useEffect(() => {
-    const update = () =>
-      setToday(
-        new Intl.DateTimeFormat("en-US", {
-          weekday: "long",
-          timeZone: "America/Chicago",
-        }).format(new Date()),
-      );
-    update();
-    const timer = setInterval(update, 60000);
-    return () => clearInterval(timer);
-  }, []);
   async function submit(values: z.infer<typeof contactSchema>) {
     setStatus({ text: "", error: false });
     const error = attachmentError(attachments);
@@ -266,59 +254,7 @@ export default function ContactSection({
               <br />
               <a href={PHONE_HREF}>{PHONE}</a>
             </address>
-            <h3 className="site-details-title">Opening hours</h3>
-            {variant === "home" ? (
-              <details className="home-hours" open>
-                <summary>
-                  {today
-                    ? `${HOURS.find((row) => row.day === today)?.hours === "Closed" ? "Closed today" : `Open today ${HOURS.find((row) => row.day === today)?.hours}`}`
-                    : "View opening hours"}
-                </summary>
-                <table>
-                  <caption className="sr-only">
-                    Salon hours, Chicago local time
-                  </caption>
-                  <tbody>
-                    {HOURS.map((row) => (
-                      <tr
-                        key={row.day}
-                        className={today === row.day ? "today" : ""}
-                      >
-                        <th scope="row">
-                          {row.day}
-                          {today === row.day && (
-                            <span className="sr-only"> (today)</span>
-                          )}
-                        </th>
-                        <td>{row.hours}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </details>
-            ) : (
-              <table>
-                <caption className="sr-only">
-                  Salon hours, Chicago local time
-                </caption>
-                <tbody>
-                  {HOURS.map((row) => (
-                    <tr
-                      key={row.day}
-                      className={today === row.day ? "today" : ""}
-                    >
-                      <th scope="row">
-                        {row.day}
-                        {today === row.day && (
-                          <span className="sr-only"> (today)</span>
-                        )}
-                      </th>
-                      <td>{row.hours}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            )}
+            {hours}
             <h3 className="site-details-title">Cancellation policy</h3>
             <p>{CANCELLATION_POLICY}</p>
           </div>

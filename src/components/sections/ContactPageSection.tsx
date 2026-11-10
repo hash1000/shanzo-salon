@@ -1,51 +1,32 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Check, FileText, LoaderCircle, Upload, X } from "lucide-react";
 import { contactPageSchema } from "@/lib/contact-page-schema";
 import { ATTACHMENT_ACCEPT, attachmentError } from "@/lib/contact-attachments";
-import { ADDRESS, BOOKING_URL, CANCELLATION_POLICY, HOURS, PHONE, PHONE_HREF } from "@/lib/site";
+import {
+  ADDRESS,
+  BOOKING_URL,
+  CANCELLATION_POLICY,
+  PHONE,
+  PHONE_HREF,
+} from "@/lib/site";
 
 type Values = z.infer<typeof contactPageSchema>;
-export default function ContactPageSection() {
+export default function ContactPageSection({ hours }: { hours: ReactNode }) {
   const [files, setFiles] = useState<File[]>([]);
   const [fileError, setFileError] = useState("");
   const [error, setError] = useState("");
   const [sent, setSent] = useState<Values | null>(null);
-  const [clock, setClock] = useState<{ day: string; open: boolean } | null>(
-    null,
-  );
   const input = useRef<HTMLInputElement>(null);
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<Values>({ resolver: zodResolver(contactPageSchema) });
-  useEffect(() => {
-    function update() {
-      const parts = new Intl.DateTimeFormat("en-US", {
-        timeZone: "America/Chicago",
-        weekday: "long",
-        hour: "numeric",
-        minute: "numeric",
-        hourCycle: "h23",
-      }).formatToParts(new Date());
-      const get = (type: string) =>
-        parts.find((part) => part.type === type)?.value ?? "";
-      const day = get("weekday");
-      const minutes = Number(get("hour")) * 60 + Number(get("minute"));
-      setClock({
-        day,
-        open: minutes >= (day === "Sunday" ? 13 : 10) * 60 && minutes < 19 * 60,
-      });
-    }
-    update();
-    const timer = setInterval(update, 30000);
-    return () => clearInterval(timer);
-  }, []);
   function addFiles(selected: File[]) {
     const next = [...files, ...selected];
     const problem = attachmentError(next);
@@ -320,33 +301,7 @@ export default function ContactPageSection() {
           <a href="mailto:info@shanzosalon.com">info@shanzosalon.com</a>
           <a href={PHONE_HREF}>{PHONE}</a>
         </address>
-        <div className="contact-hours-heading">
-          <h3>Opening hours</h3>
-          {clock && (
-            <span className="contact-open-badge">
-              {clock.open ? "Open now" : "Closed"}
-            </span>
-          )}
-        </div>
-        <table>
-          <caption className="sr-only">Salon hours in America/Chicago</caption>
-          <tbody>
-            {HOURS.map((row) => (
-              <tr
-                key={row.day}
-                className={clock?.day === row.day ? "contact-today" : undefined}
-              >
-                <th scope="row">
-                  {row.day}
-                  {clock?.day === row.day && (
-                    <span className="sr-only"> (today)</span>
-                  )}
-                </th>
-                <td>{row.day === "Sunday" ? "1 PM - 7 PM" : row.hours}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        {hours}
         <div className="contact-policy">
           <h3>Cancellation policy</h3>
           <p>{CANCELLATION_POLICY}</p>

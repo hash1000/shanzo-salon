@@ -13,15 +13,6 @@ export const SOCIALS = {
 };
 export const CANCELLATION_POLICY =
   "Cancellations accepted up to 24 hours before the scheduled service. Within 24 hours of the service, cancellations will be charged 50% of the scheduled cost.";
-export const HOURS = [
-  { day: "Monday", hours: "10 AM - 7 PM" },
-  { day: "Tuesday", hours: "10 AM - 7 PM" },
-  { day: "Wednesday", hours: "10 AM - 7 PM" },
-  { day: "Thursday", hours: "10 AM - 7 PM" },
-  { day: "Friday", hours: "10 AM - 7 PM" },
-  { day: "Saturday", hours: "10 AM - 7 PM" },
-  { day: "Sunday", hours: "01 PM - 7 PM" },
-];
 export const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },

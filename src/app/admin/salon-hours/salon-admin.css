@@ -1,0 +1,5 @@
+/* Keep native time controls readable within the split editor/preview layout. */
+.salon-admin .admin-days { grid-template-columns: minmax(0, 1fr); }
+.salon-admin .admin-day :is(input, [role="switch"], button) { scroll-margin-block: 150px; }
+.salon-admin :is(input, button, a, [role="switch"]):focus-visible { outline: 2px solid #80603a; outline-offset: 4px; }
+@media (min-width: 1600px) { .salon-admin .admin-days { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

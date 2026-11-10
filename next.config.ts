@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
   // Cache Components disables that route option in Next 16.
   cacheComponents: false,
   outputFileTracingIncludes: {
+    "/contact": ["./data/salon-hours.json"],
+    "/apply": ["./data/salon-hours.json"],
+    "/admin/salon-hours": ["./data/salon-hours.json"],
+    "/api/admin/salon-hours": ["./data/salon-hours.json"],
     "/hours": ["./data/walk-in-hours.json"],
     "/admin": ["./data/walk-in-hours.json"],
     "/admin/login": ["./data/walk-in-hours.json"],

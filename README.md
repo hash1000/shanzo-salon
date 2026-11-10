@@ -127,3 +127,26 @@ npm start
 For an existing release, stop its app process before clearing the generated
 `.next` directory and rebuilding. Then restart the app with your existing
 process manager. Preserve environment files and persistent hours data.
+
+## Salon opening hours (separate from walk-ins)
+
+Open `/admin/salon-hours` after the existing owner login. The navigation switches
+between the two independent managers. Salon opening hours appear on `/contact`
+and the visiting sidebar on `/apply`; walk-in availability stays on `/hours`.
+
+Set `SALON_HOURS_DATA_PATH` next to `HOURS_DATA_PATH` in the server environment,
+for example `/var/lib/shanzo/salon-hours.json`. Seed it from
+`data/salon-hours.json`. The default is `data/salon-hours.json` relative to the
+app working directory. Use a **persistent writable disk**, outside release
+folders, and give the server user write access to its parent directory for
+atomic saves. File writes do not persist on serverless hosting. Include the
+live file in backups. Missing or invalid JSON falls back to Mon–Sat 10 AM–7 PM
+and Sunday 1 PM–7 PM; the next save recreates the file.
+
+The manager supports closed days, up to three nonoverlapping shifts per day,
+and date-specific closures or hours with an optional note. Past special dates
+are hidden in the editor but retained in storage. Review the preview and save
+to publish; unsaved edits stay private. Saving updates `lastUpdated` and
+revalidates the public pages. Reload an open public page to see saved changes.
+All status calculations use America/Chicago, including daylight saving time.
+No changes to the existing login credentials or walk-in schedules are required.
