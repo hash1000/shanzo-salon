@@ -217,7 +217,7 @@
 .team-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
 .about-small-note { max-width: 48ch; line-height: 1.8; }
 .footer-services { display: grid; gap: 10px; }
-.about-luxury .footer-services h2 { font-family: var(--about-sans),sans-serif; font-size: 14px; font-weight: 600; }
+.about-luxury .footer-services h2 { font-family: var(--about-sans),sans-serif; font-size: 16px; font-weight: 600; }
 .portfolio-profile { padding-block: 64px; }
 .portfolio-profile-grid { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.3fr); gap: 48px; align-items: center; margin-top: 32px; }
 .portfolio-portrait { position: relative; aspect-ratio: 4/5; overflow: hidden; border-radius: 130px 130px 16px 16px; background: #eee9e0; }
