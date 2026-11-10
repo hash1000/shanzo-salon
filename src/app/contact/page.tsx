@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PHONE } from "@/lib/site";
 import SiteShell, {
   PageHeading,
   SocialLinks,
@@ -8,7 +9,7 @@ import "./contact.css";
 export const metadata: Metadata = {
   title: "Contact | Shanzo Salon",
   description:
-    "Visit Shanzo Salon at 67 W Chicago Ave, Chicago. Email info@shanzosalon.com or call (312) 754-0191. Open Monday to Saturday 10 AM to 7 PM, Sunday 1 PM to 7 PM.",
+    `Visit Shanzo Salon at 67 W Chicago Ave, Chicago. Email info@shanzosalon.com or call ${PHONE}. Open Monday to Saturday 10 AM to 7 PM, Sunday 1 PM to 7 PM.`,
 };
 export default function ContactPage() {
   return (

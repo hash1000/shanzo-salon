@@ -32,7 +32,7 @@ const photos = [
     alt: "A neatly prepared treatment bed in the private waxing room",
   },
   {
-    src: "/images/brows-n-lashes.webp",
+    src: "/images/brows-n-lashes.png",
     width: 740, height: 740,
     alt: "A neatly prepared brows-n-lashes treatment station with a magnifying lamp",
   },

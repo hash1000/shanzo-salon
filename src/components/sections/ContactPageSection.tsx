@@ -7,7 +7,7 @@ import { z } from "zod";
 import { Check, FileText, LoaderCircle, Upload, X } from "lucide-react";
 import { contactPageSchema } from "@/lib/contact-page-schema";
 import { ATTACHMENT_ACCEPT, attachmentError } from "@/lib/contact-attachments";
-import { ADDRESS, BOOKING_URL, CANCELLATION_POLICY, HOURS } from "@/lib/site";
+import { ADDRESS, BOOKING_URL, CANCELLATION_POLICY, HOURS, PHONE, PHONE_HREF } from "@/lib/site";
 
 type Values = z.infer<typeof contactPageSchema>;
 export default function ContactPageSection() {
@@ -72,7 +72,7 @@ export default function ContactPageSection() {
       setFiles([]);
     } catch {
       setError(
-        "Your message could not be sent. Please try again, email info@shanzosalon.com or call (312) 754-0191.",
+        `Your message could not be sent. Please try again, email info@shanzosalon.com or call ${PHONE}.`,
       );
     }
   }
@@ -318,7 +318,7 @@ export default function ContactPageSection() {
         <address>
           {ADDRESS}
           <a href="mailto:info@shanzosalon.com">info@shanzosalon.com</a>
-          <a href="tel:+13127540191">(312) 754-0191</a>
+          <a href={PHONE_HREF}>{PHONE}</a>
         </address>
         <div className="contact-hours-heading">
           <h3>Opening hours</h3>

@@ -1,3 +1,5 @@
+import { PHONE_NUMBER } from "@/lib/site";
+
 /** Shared walk-in types and public contact links. Edit schedules through /admin. */
 export type Day = "mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun";
 export type TimeRange = { open: string; close: string };
@@ -12,6 +14,5 @@ export type WalkInConfig = {
 };
 
 export const WALK_IN_BOOKING_URL = "https://booking.cojilio.com/4239/online/Menu/Services";
-// TODO: Owner to confirm/replace this placeholder phone before publishing.
-export const WALK_IN_PHONE = "+13125550100";
+export const WALK_IN_PHONE = PHONE_NUMBER;
 

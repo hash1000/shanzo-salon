@@ -1,7 +1,8 @@
 export const SITE_NAME = "Shanzo Salon";
 export const ADDRESS = "67 W Chicago Ave, Chicago, IL 60654";
-export const PHONE = "info@shanzosalon.com";
-export const PHONE_HREF = "tel:+13127540191";
+export const PHONE_NUMBER = "+18722592065";
+export const PHONE = "(872) 259-2065";
+export const PHONE_HREF = `tel:${PHONE_NUMBER}`;
 export const BOOKING_URL =
   "https://booking.cojilio.com/4239/online/Menu/Services";
 export const BOOKING_BASE_URL = "https://booking.cojilio.com/4239";
