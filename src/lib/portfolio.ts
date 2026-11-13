@@ -23,7 +23,7 @@ export async function getPortfolioItems(member: TeamMember): Promise<PortfolioIt
         src: `/gallery/${member.galleryFolder}/${encodeURIComponent(name)}`,
         kind: /\.(mp4|webm|mov)$/i.test(name) ? 'video' : 'photo',
         caption,
-        description: portfolioDescriptions[member.slug]?.[caption],
+        description: portfolioDescriptions[member.slug]?.[name] ?? portfolioDescriptions[member.slug]?.[caption],
         category: member.service === 'Nail Technician' ? 'Nail artistry' : member.service === 'Hair Stylist' ? 'Hair artistry' : 'Skin & beauty',
       };
     });

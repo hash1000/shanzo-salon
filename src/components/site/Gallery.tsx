@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import SilentVideo from "./SilentVideo";
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, Expand, Film, X } from "lucide-react";
 
@@ -51,9 +52,10 @@ const videos = [
   { src: "/media/5B373F1C-7DB4-49FC-BC2B-4EA1F753CC13.mp4", poster: "/gallery/video-poster-3.jpg", width: 720, height: 1280, title: "A little look around", caption: "Behind the scenes at Shanzo Salon" },
   { src: "/gallery/gallery-video-1.mp4", width: 1280, height: 720, poster: "/gallery/video-poster-1.jpg", title: "Care in the details", caption: "A closer look at waxing preparation" },
   { src: "/gallery/gallery-video-2.mp4", width: 1280, height: 720, poster: "/gallery/video-poster-2.jpg", title: "A moment to unwind", caption: "Personal attention, from heel to toe" },
+  { src: "/gallery/video-poster-4.mp4", width: 576, height: 1024, poster: "/gallery/video-poster-4.jpg", title: "A polished finish", caption: "A closer look at a black French-tip manicure" },
 ];
-const titles = ["Come on in", "A little hair care", "Your seat is ready", "Colour outside the lines", "Room to relax", "A fresh start", "A touch of shimmer"];
-const pins = [0, videos[0], 1, videos[1], 2, 3, 4, videos[2], 5, 6];
+const titles = ["Come on in", "A little hair care", "Your seat is ready", "Colour outside the lines", "Room to relax", "A fresh start", "Time to refresh", "A touch of shimmer"];
+const pins = [0, videos[0], 1, videos[1], 2, 3, 4, videos[2], 5, 6, videos[3], 7];
 
 export default function Gallery() {
   const [filter, setFilter] = useState("All");
@@ -93,10 +95,10 @@ export default function Gallery() {
               return (
                 <figure className="gallery-pin" key={pin.src}>
                   <div className="gallery-video-media">
-                    <video width={pin.width} height={pin.height} autoPlay muted loop controls playsInline preload="metadata" poster={pin.poster} aria-label={pin.caption}>
+                    <SilentVideo width={pin.width} height={pin.height} poster={pin.poster} aria-label={pin.caption}>
                       <source src={pin.src} type="video/mp4" />
                       Your browser does not support video. <a href={pin.src}>Download the video</a>.
-                    </video>
+                    </SilentVideo>
                   </div>
                   <figcaption><span className="gallery-pin-kind"><Film size={12} aria-hidden="true" /> Salon moments</span><h2>{pin.title}</h2><p>{pin.caption}</p></figcaption>
                 </figure>
@@ -122,7 +124,7 @@ export default function Gallery() {
                   <Image src={photo.src} loading={pin < 2 ? "eager" : "lazy"} alt={photo.alt} fill sizes="(max-width:639px) 90vw,(max-width:1023px) 40vw,27vw" className="object-cover" />
                   <span><Expand size={18} aria-hidden="true" /></span>
                 </button>
-                <figcaption><span className="gallery-pin-kind">{pin === 3 || pin === 6 ? "Nail inspiration" : "Life at the salon"}</span><h2>{titles[pin]}</h2></figcaption>
+                <figcaption><span className="gallery-pin-kind">{pin === 3 || pin === 7 ? "Nail inspiration" : "Life at the salon"}</span><h2>{titles[pin]}</h2></figcaption>
               </figure>
             );
           })}

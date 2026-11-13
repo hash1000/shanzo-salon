@@ -50,6 +50,7 @@ export const team: TeamMember[] = [
     service: "Hair Stylist",
     image: "/genean-michele.png",
     bio: [
+      "Certified Hair Extension Specialist specializing in K-Tips, Micro Links, and Tape-In Extensions.",
       "With over six years in the beauty industry, Genean specializes in bridal artistry and styling, extensions, and effortless lived-in color. Chicago-based since 2023, she loves creating customized looks that feel polished, dimensional, and uniquely suited to each client.",
       "Genean is certified in K-tip, tape-in, and micro-link sew-in extensions, as well as Brazilian Blowout treatments. She also has a passion for hair health, specializing in restorative treatments and hair repair for damage caused by color services or improper extension installations. Whether creating a special-event style, adding length and dimension, or helping a client restore and maintain healthy hair, Genean brings a thoughtful, personalized approach to every service.",
     ],

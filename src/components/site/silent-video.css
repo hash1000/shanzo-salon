@@ -1,0 +1,10 @@
+video[data-silent-video]::-webkit-media-controls,
+video[data-silent-video]::-webkit-media-controls-enclosure,
+video[data-silent-video]::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
+
+video[data-silent-video] {
+  max-width: 100%;
+}

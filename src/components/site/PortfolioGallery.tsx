@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import SilentVideo from './SilentVideo';
 import { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, Expand, X } from 'lucide-react';
 import type { PortfolioItem } from '@/lib/portfolio';
@@ -32,7 +33,7 @@ export default function PortfolioGallery({ items, name }: { items: PortfolioItem
       {!visible.length && <p className="about-body pb-12">More work is coming soon. Explore the other tabs in the meantime.</p>}
       <div className="site-gallery gallery-pins">
         {visible.map(item => <figure className="gallery-pin" key={item.src}>
-          {item.kind === 'video' ? <div className="gallery-video-media"><video src={item.src} autoPlay muted controls playsInline loop preload="metadata" aria-label={item.description || item.caption}>Your browser cannot play this video. <a href={item.src}>Download video</a>.</video></div> :
+          {item.kind === 'video' ? <div className="gallery-video-media"><SilentVideo src={item.src} aria-label={item.description || item.caption}>Your browser cannot play this video.</SilentVideo></div> :
             <button type="button" className="site-gallery-photo" aria-label={`View ${item.description || item.caption}`} onClick={event => {
               trigger.current = event.currentTarget; setActive(photos.findIndex(photo => photo.src === item.src)); dialog.current?.showModal(); dialog.current?.dispatchEvent(new Event('portfolio-open'));
             }}><Image src={item.src} alt={`${item.description || item.caption} by ${name}`} fill sizes="(max-width:639px) 90vw,(max-width:1023px) 40vw,27vw" className="object-cover" /><span><Expand size={18} aria-hidden="true" /></span></button>}

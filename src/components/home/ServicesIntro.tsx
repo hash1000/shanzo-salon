@@ -1,14 +1,11 @@
+import SilentVideo from '@/components/site/SilentVideo';
+
 export default function ServicesIntro() {
   return (
     <section className="home-container section-space services-grid">
       <div className="services-image services-video">
-        <video
+        <SilentVideo
           className="h-full w-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
           aria-label="A video tour inside Shanzo Salon"
         >
           <source
@@ -16,7 +13,7 @@ export default function ServicesIntro() {
             type="video/mp4"
           />
           Your browser does not support video playback.
-        </video>
+        </SilentVideo>
       </div>
       <div className="services-copy">
         <h2 className="section-title font-script">A little time, beautifully yours.</h2>
