@@ -1,5 +1,8 @@
 // Exact filenames take priority over filename-derived card titles.
 export const portfolioDescriptions: Record<string, Record<string, string>> = {
+  "violet-eliza": {
+    "violet.mp4": "A behind-the-chair look at Violet styling a men's cut with a swept-back finish.",
+  },
   "genean-michele": {
     "genean-1.png": "Genean caring for a client's hair at the wash station.",
     "genean-2.png": "Genean creating a smooth blowout with a round brush.",
@@ -17,10 +20,14 @@ export const portfolioDescriptions: Record<string, Record<string, string>> = {
     "Ruby 6": "Pink sparkle tips with gold gem details on almond nails.",
     "Ruby 7": "Glitter ombré acrylics finished with tiny gold charms.",
     "Ruby 8": "Playful pink and yellow nail art with silver accents and colorful raised details.",
+    "Ruby 9": "Short, natural nails with a clean, rounded shape and a subtle shine.",
+    "Ruby 10": "Shimmering blue-gray polish on long almond nails.",
+    "Ruby 11": "Soft pink almond nails with a smooth, glossy finish.",
   },
   "marija-aleksic": {
     "marija-14.png": "Marija working with a client at the manicure station.",
     "marija.mp4": "A closer look at Marija's nail artistry.",
+    "marija-1.mp4": "A behind-the-scenes look at Marija shaping and polishing a soft pink manicure.",
     "Marija 1": "Marija's professional training certificates.",
     "Marija 2": "Butterfly wing nail art with teal iridescent shimmer.",
     "Marija 3": "Soft pearl chrome finish, cured under the UV lamp.",
